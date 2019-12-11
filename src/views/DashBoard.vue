@@ -1,6 +1,6 @@
 <template>
  <v-container fluid>
-  <h1 class=" display-2 white--text text-center mt-5">DashBoard</h1>
+  <h1 class=" display-2   white--text text-center mt-5 font-weight-bold">DashBoard</h1>
         <v-row
           align="center"
           justify="space-around"
@@ -53,12 +53,24 @@
   
    </v-row>
   
+    <v-row 
+       justify="center"
+     align="center"
+
+      >
+        <h1 class="subheading  white--text text-center mt-5 font-weight-light text-uppercase">Tickets
+            <v-icon color="white" size="40">
+          forum
+        </v-icon>
+        </h1>
+      
+      </v-row>
     <v-row
      justify="center"
      align="center"
      class="mt-5"
      >
-     
+    
 
       <v-card flat v-for="ticket in ticketslst" :key="ticket.title" width="1500" class="mb-1" shaped>
        <v-layout row wrap class="pa-3 ticket">
@@ -80,7 +92,7 @@
               <v-chip small 
               color="secondary">
              {{ ticket.numeroTicket }}</v-chip>
-              <v-btn icon class="ml-5">
+              <v-btn  icon class="ml-5">
                 Responder
               <v-icon right>
                 message

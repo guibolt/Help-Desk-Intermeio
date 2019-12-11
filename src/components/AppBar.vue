@@ -23,19 +23,24 @@
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>
-
+        
     <v-navigation-drawer v-model="drawer" absolute  temporary color="secondary"
     :mini-variant.sync="mini"
     >
+      
       <v-list nav dense >
         <v-list-item>
           <v-list-item-avatar>
             <v-icon color="white">account_circle</v-icon>
           </v-list-item-avatar>
+          
 
           <v-list-item-content >
             <v-list-item-title class="white--text">{{userName}}</v-list-item-title>
           </v-list-item-content>
+             <v-flex class=" mt-4 mb-3">
+              <TicketForm />
+          </v-flex>
           <v-list-item-content >
            <v-btn icon
            @click="mini = !mini"
@@ -48,10 +53,10 @@
 
         </v-list-item>
 
+      
         <v-divider></v-divider>
 
         <v-divider></v-divider>
-
         <v-list dense>
           <v-list-item
             v-for="item in itensCliente"
@@ -66,8 +71,13 @@
 
             <v-list-item-content>
               <v-list-item-title class="white--text">{{ item.title }}</v-list-item-title>
+                 
             </v-list-item-content>
           </v-list-item>
+      
+       
+           
+       
         </v-list>
       </v-list>
     </v-navigation-drawer>
@@ -75,10 +85,14 @@
 </template>
 <script>
 import { createNamespacedHelpers } from "vuex";
+import TicketForm from '@/components/TicketForm.vue'
 
 const { mapActions, mapState } = createNamespacedHelpers("login");
 
 export default {
+  components: {
+   TicketForm    
+  },
   data: () => ({
     userName: "Joao",
     drawer: false,
