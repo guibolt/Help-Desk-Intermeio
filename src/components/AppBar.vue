@@ -96,6 +96,7 @@ export default {
         url: "/novoticket"
       },
       {
+
         title: "Tickets",
         icon: "view_list",
         url: "/tickets"
