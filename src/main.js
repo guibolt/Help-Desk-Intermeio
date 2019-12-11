@@ -11,14 +11,12 @@ Vue.config.productionTip = false;
 import Vuelidate from "vuelidate";
 
 Vue.prototype.$http = Axios;
-import VueIziToast from "vue-izitoast";
-import "izitoast/dist/css/iziToast.min.css";
-import { toast } from "./mixins/toast";
-Vue.use(VueIziToast);
+import VueIziToast from 'vue-izitoast';
+import 'izitoast/dist/css/iziToast.css';
+Vue.use(VueIziToast)
 Vue.use(Vuelidate);
 
 new Vue({
-  mixins: [toast],
   router,
   store,
   vuetify,

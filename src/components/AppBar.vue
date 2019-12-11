@@ -109,15 +109,14 @@ export default {
     ]
   }),
   methods: {
-    ...mapActions({
-      fazerLogout: "logout"
-    }),
+    ...mapActions(["Deslogar"]),
     ValidaERedireciona(item) {
       if (item.url === this.$route.path) this.drawer = !this.drawer;
       else this.$router.push(item.url);
     },
-    logout() {
-      this.fazerLogout().then(this.$router.push("/login"));
+     logout() {
+       this.Deslogar();
+      this.$router.push("/login");
     },
   }
 };
