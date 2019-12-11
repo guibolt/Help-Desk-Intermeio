@@ -54,7 +54,7 @@
 
         <v-list dense>
           <v-list-item
-            v-for="item in items"
+            v-for="item in itensCliente"
             :key="item.title"
             link
            router :to="item.url"
@@ -84,21 +84,27 @@ export default {
     drawer: false,
     mini: false,
     icon: undefined,
-    items: [
+    itensCliente: [
       {
-        title: "Home",
-        icon: "dashboard",
-        url: "/home"
+        title: "Dashboard",
+        icon: "house",
+        url: "/"
       },
       {
-        title: "Alunos e Professores",
-        icon: "people",
-        url: "/pessoas"
+        title: "Criar novo ticket",
+        icon: "fiber_new",
+        url: "/novoticket"
       },
       {
-        title: "Criar Ticket",
-        icon: "create",
-        url : ""
+
+        title: "Tickets",
+        icon: "view_list",
+        url: "/tickets"
+      },
+      {
+        title: "Faq",
+        icon: "question_answer",
+        url: "/faq"
       }
     ]
   }),

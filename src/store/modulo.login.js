@@ -1,14 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import { stat } from "fs";
 
 Vue.use(Vuex);
 
-const baseURL = process.env.VUE_APP_URL;
-
 const apiClient = axios.create({
-  baseURL,
+  baseURL :  process.env.VUE_APP_URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json"
@@ -29,13 +26,10 @@ export const login = {
 
   mutations: {
     //essa área eu declaro meus commit's e oque eles vão receber...
-    Carregado: state => (state.ACarregar = true),
+    Carregado: state => state.ACarregar = true,
     FalhaLogar: (state, MensagemErro) => {
-      state.ProcessouLogin = false;
       state.ErrorLogin = MensagemErro;
       state.SucessoLogin = false;
-      state.nome = "";
-      state.tipo = "";
     },
     SucessoAoLogar: (state, resultado, status) => {
       if (resultado != null && status != false) {

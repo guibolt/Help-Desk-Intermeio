@@ -6,6 +6,12 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '/',
+    name: 'Dashboard',
+    component: () => import(/* webpackChunkName: "Dashboard" */ '../views/DashBoard.vue')
+  },
+
+  {
     path: "/login",
     name: "Login",
     component: () =>
