@@ -94,6 +94,11 @@ export default {
         title: "Alunos e Professores",
         icon: "people",
         url: "/pessoas"
+      },
+      {
+        title: "Criar Ticket",
+        icon: "create",
+        url : ""
       }
     ]
   }),
