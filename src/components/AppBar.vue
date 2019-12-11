@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar color="primary" dense dark>
+    <v-app-bar color="primary"  dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-divider class="mx-4" inset vertical></v-divider>
           <v-btn @click="$router.push('/')" text>
@@ -24,7 +24,9 @@
       </v-toolbar-items>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute bottom temporary color="secondary">
+    <v-navigation-drawer v-model="drawer" absolute bottom temporary color="secondary"
+    :mini-variant.sync="mini"
+    >
       <v-list nav dense >
         <v-list-item>
           <v-list-item-avatar>
@@ -34,6 +36,16 @@
           <v-list-item-content >
             <v-list-item-title class="white--text">{{userName}}</v-list-item-title>
           </v-list-item-content>
+          <v-list-item-content >
+           <v-btn icon
+           @click="mini = !mini"
+           >
+             <v-icon color="white">
+               chevron_left
+             </v-icon>
+           </v-btn>
+          </v-list-item-content>
+
         </v-list-item>
 
         <v-divider></v-divider>
@@ -45,8 +57,8 @@
             v-for="item in items"
             :key="item.title"
             link
-            @click="ValidaERedireciona(item)"
-           
+           router :to="item.url"
+
           >
             <v-list-item-icon>
               <v-icon color="white">{{ item.icon }}</v-icon>
@@ -70,6 +82,8 @@ export default {
   data: () => ({
     userName: "Joao",
     drawer: false,
+    mini: false,
+    icon: undefined,
     items: [
       {
         title: "Home",
@@ -93,7 +107,12 @@ export default {
     },
     logout() {
       this.fazerLogout().then(this.$router.push("/login"));
-    }
+    },
+     modificaMini(){
+
   }
+  }
+
+ 
 };
 </script>
