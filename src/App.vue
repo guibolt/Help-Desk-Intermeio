@@ -3,7 +3,7 @@
     background: #8e9eab;
      ">
     <v-content>
-      <AppBar v-if="$route.path !== '/login'"/>
+      <AppBar v-if="$route.path !== '/login'" />
       <router-view/>
     </v-content>
   </v-app>

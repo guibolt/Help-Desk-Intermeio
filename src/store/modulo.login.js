@@ -30,6 +30,7 @@ export const login = {
     FalhaLogar: (state, MensagemErro) => {
       state.ErrorLogin = MensagemErro;
       state.SucessoLogin = false;
+      state.ACarregar = false
     },
     LogOut: state => state.SucessoLogin = true,
     SucessoAoLogar: (state, resultado) => {

@@ -104,7 +104,6 @@ background: linear-gradient(to right, #1488cc, #6dd5ed); /* W3C, IE 10+/ Edge, F
 <script>
 import { required, email, minLength,sameAs } from "vuelidate/lib/validators";
 import { createNamespacedHelpers } from "vuex";
-import store from '../store';
 const { mapActions, mapState } = createNamespacedHelpers("login");
 export default {
   name: "Login",
@@ -118,9 +117,6 @@ export default {
       confirmPassword: ''
     }
   }),
-  created: function() {
-    if(store.state.SucessoLogin) this.$router.push("/dashboard");
-  },
   validations() {
     const validations = {
       user: {
@@ -209,6 +205,9 @@ export default {
       return !this.$v.user.confirmPassword$invalid && this.$v.user.confirmPassword.$dirty
     }
   },
+      created: function() {
+      if(this.SucessoLogin) this.$router.push("/");
+    },
   methods: {
     ...mapActions(["Logar","Cadastrar"]),
     async submit() {
@@ -264,7 +263,7 @@ export default {
           this.$toast.success("Cadastro efetuado faça o login.", "Sucesso", {
           position: "topRight"
         });
-        this.$router.push("/");
+        this.$router.push("/login");
         }
       }
     }
