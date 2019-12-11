@@ -29,25 +29,25 @@ const router = new VueRouter({
   routes
 });
 
-router.beforeEach((to, from, next) => {
-  /*Configura as rotas que nao precisam de autorizacao*/
-  const publicPages = ["/", "/login"];
+// router.beforeEach((to, from, next) => {
+//   /*Configura as rotas que nao precisam de autorizacao*/
+//   const publicPages = ["/", "/login"];
 
-  //Verifica se a rota que o usuario quer precisa ou não de autorizacao
-  const authRequired = !publicPages.includes(to.path);
+//   //Verifica se a rota que o usuario quer precisa ou não de autorizacao
+//   const authRequired = !publicPages.includes(to.path);
 
-  //Verificar se usuario esta logado no sistema
-  const isLogado = JSON.parse(localStorage.getItem("token"));
+//   //Verificar se usuario esta logado no sistema
+//   const isLogado = JSON.parse(localStorage.getItem("token"));
 
-  store.state.login.SucessoLogin = isLogado == null ? false : true;
-  if (store.state.login.SucessoLogin)
-    store.commit("login/SucessoAoLogar", isLogado);
+//   store.state.login.SucessoLogin = isLogado == null ? false : true;
+//   if (store.state.login.SucessoLogin)
+//     store.commit("login/SucessoAoLogar", isLogado);
 
-  //Verifica se o usuario esta logado ou nao
-  if (!store.state.login.SucessoLogin)
-    if (authRequired && !store.state.login.SucessoLogin) return next("/login");
+//   //Verifica se o usuario esta logado ou nao
+//   if (!store.state.login.SucessoLogin)
+//     if (authRequired && !store.state.login.SucessoLogin) return next("/login");
 
-  next();
-});
+//   next();
+// });
 
 export default router;

@@ -24,7 +24,7 @@
       </v-toolbar-items>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute bottom temporary color="secondary"
+    <v-navigation-drawer v-model="drawer" absolute  temporary color="secondary"
     :mini-variant.sync="mini"
     >
       <v-list nav dense >
@@ -119,11 +119,6 @@ export default {
     logout() {
       this.fazerLogout().then(this.$router.push("/login"));
     },
-     modificaMini(){
-
   }
-  }
-
- 
 };
 </script>
