@@ -5,7 +5,7 @@ import axios from "axios";
 Vue.use(Vuex);
 
 const apiClient = axios.create({
-  baseURL :  process.env.VUE_APP_URL,
+  baseURL: process.env.VUE_APP_URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json"
@@ -31,11 +31,12 @@ export const login = {
       state.ErrorLogin = MensagemErro;
       state.SucessoLogin = false;
     },
-    SucessoAoLogar: (state, resultado, status) => {
-      if (resultado != null && status != false) {
+    LogOut: state => state.SucessoLogin = true,
+    SucessoAoLogar: (state, resultado) => {
+      if (resultado != null) {
         state.nome = resultado.nome;
         state.tipo = resultado.tipo;
-        state.SucessoLogin = status;
+        state.SucessoLogin = true;
       }
     },
     usuario: (state, DadosCadastro) => {
@@ -54,17 +55,14 @@ export const login = {
   actions: {
     async Logar({ commit }, DadosLogin) {
       //aqui declaro que o primeiro commit vai ser de InicioLogin aonde o estou processando o login....
-      commit("Carregando");
+      commit("Carregado");
       await apiClient
-        .post("/Usuarios/Autenticas", {
+        .post("/Usuarios/Autenticar", {
           //Dados login eu recebo lá na minha Login.Vue.
           ...DadosLogin
         })
         .then(resposta => {
           let resultado = resposta.data.resultado;
-
-          console.log("Resultado do Login", resultado);
-
           if (resposta.data.status == false)
             return commit("FalhaLogar", resultado);
           //se o status do login for true eu declaro que a falha ao logar recebe null e mando os dados pro meu commit sucesso ao logar..
@@ -81,7 +79,7 @@ export const login = {
     },
     async Cadastrar({ commit }, DadosCadastro) {
       //carregando requisição ...
-      commit("Carregando");
+      commit("Carregado");
       await apiClient
         .post("/Usuarios", {
           //enviando dados do cadastro
@@ -97,6 +95,11 @@ export const login = {
         .catch(erro => {
           commit("ErroCadastro", erro.message);
         });
+    },
+    async Deslogar({commit}) {
+      commit("Carregado");
+      localStorage.removeItem("token");
+      commit("LogOut",false);
     }
   }
 };

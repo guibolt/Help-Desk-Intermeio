@@ -16,6 +16,7 @@ export default {
     AppBar
   },
     created(){
+      if (localStorage.getItem("token")) this.$router.push("/login");
     console.log('Route:', this.$route)
   }
 ,

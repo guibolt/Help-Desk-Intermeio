@@ -103,11 +103,13 @@ background: linear-gradient(to right, #1488cc, #6dd5ed); /* W3C, IE 10+/ Edge, F
 
 <script>
 import { required, email, minLength,sameAs } from "vuelidate/lib/validators";
-
+import { createNamespacedHelpers } from "vuex";
+import store from '../store';
+const { mapActions, mapState } = createNamespacedHelpers("login");
 export default {
   name: "Login",
   data: () => ({
-    isLogin: true,
+    isLogin: true, //isso que diferencia
     isLoading: false,
     user: {
       name: "",
@@ -116,6 +118,9 @@ export default {
       confirmPassword: ''
     }
   }),
+  created: function() {
+    if(store.state.SucessoLogin) this.$router.push("/dashboard");
+  },
   validations() {
     const validations = {
       user: {
@@ -148,6 +153,7 @@ export default {
     };
   },
   computed: {
+    ...mapState([ "ACarregar", "ErrorLogin", "SucessoLogin","nome","email","ErroCadastro"]),
     texts() {
       return this.isLogin
         ? { toolbar: "Login", button: "Criar conta" }
@@ -204,19 +210,62 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["Logar","Cadastrar"]),
     async submit() {
-      this.isLoading = true;
-      try {
-        this.isLogin
-          ? await AuthService.login(this.user)
-          : await AuthService.signup(this.user);
-        this.$router.push(this.$route.query.redirect || "/dashboard");
-      } catch (error) {
-        console.log(error);
-        this.error = formatError(error.message);
-        this.showSnackbar = true;
-      } finally {
-        this.isLoading = false;
+      if(this.isLogin){
+        this.isLoading = this.ACarregar;
+
+          if(this.user.email === "" && this.user.senha === "")
+            return this.$toast.warning("Preencha os campos", "Alerta", {
+            position: "topRight",
+            timeout: 9000
+          });
+
+          await this.Logar({
+            email: this.user.email, 
+            senha:  this.user.password
+          })
+
+          if(this.SucessoLogin === true) {
+            this.$router.push("/");
+          }
+         else {
+          const toast = this.$toast;
+          if(this.ErrorLogin !== null ){
+          this.ErrorLogin.forEach(function(item, indice, array) {
+          toast.error(item, "Erro", {
+            position: "topRight"
+          });
+          }
+        );
+        }else{
+          console.log("Erro no Login.")
+        }
+      }
+      }else{
+        this.isLoading = this.ACarregar;
+        await this.Cadastrar({
+          nome: this.user.name,
+          email: this.user.email,
+          senha:  this.user.password,
+          confirmaSenha: this.user.confirmPassword,
+          tipo: "cliente"
+        });
+
+        if(this.ErroCadastro != null){
+          const toast = this.$toast;
+          this.ErroCadastro.forEach(function(item, indice, array) {
+            toast.error(item, "Erro", {
+              position:"topRight",
+              timeout: 9000
+            })
+          })
+        }else {
+          this.$toast.success("Cadastro efetuado faça o login.", "Sucesso", {
+          position: "topRight"
+        });
+        this.$router.push("/");
+        }
       }
     }
   }
