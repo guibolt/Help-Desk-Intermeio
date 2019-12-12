@@ -128,9 +128,9 @@ export default {
       if (item.url === this.$route.path) this.drawer = !this.drawer;
       else this.$router.push(item.url);
     },
-     logout() {
-       this.Deslogar();
-      this.$router.push("/login");
+     async logout() {
+       await this.Deslogar()
+      this.$router.push("/login")
     },
   }
 };
