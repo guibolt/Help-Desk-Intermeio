@@ -21,6 +21,7 @@ background: linear-gradient(to right, #1488cc, #6dd5ed); /* W3C, IE 10+/ Edge, F
             
           <v-toolbar color="primary" dark>
         
+
             <v-toolbar-title class="font-weight-bold ">{{ texts.toolbar }}</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-progress-circular
@@ -128,7 +129,7 @@ export default {
         },
         password: {
           required,
-          minLength: minLength(6)
+          minLength: minLength(8)
         }
       }
     };
@@ -265,7 +266,7 @@ export default {
           this.$toast.success("Cadastro efetuado faça o login.", "Sucesso", {
           position: "topRight"
         });
-        this.$router.push("/login");
+          this.isLogin = true
         }
       }
     }
