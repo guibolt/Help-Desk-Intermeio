@@ -1,9 +1,9 @@
 <template>
 <v-dialog  max-width="600px" v-model="dialog">
  <template v-slot:activator="{ on }">
-    <v-btn color="success"  v-on="on" > 
-      <v-icon left >add</v-icon>
-       CRIAT NOVO TICKET
+    <v-btn  color="primary" block  v-on="on" > 
+      <v-icon >add</v-icon>
+     {{titulo}}
     </v-btn>
       </template>
       <v-card>
@@ -12,32 +12,19 @@
           justify="center"
           align="center"
           >
-          <h2 class="display-1   blue-grey lighten-5 green--text">Adicionar Novo Ticket</h2>
+          <h2 class="display-1   blue-grey lighten-5 primary--text"><strong> Adcionar Novo Ticket</strong> </h2>
           </v-col>
         </v-card-title>
           <v-card-text>
             <v-form class="px-3" ref="form">
-              <v-text-field label= "Titulo" color="blue-grey" v-model="ticket.titulo" prepend-icon="folder" :rules ="regrasTitulo"> </v-text-field>
-              <v-text-field label= "Informações" color="blue-grey" v-model="ticket.informacao" prepend-icon="edit" :rules="regrasInfo"></v-text-field>
-
-                <v-menu
-                  max-width="290"
-                >
-                  <template v-slot:activator="{ on }">
-                    <v-text-field label="Data de entrega" prepend-icon="date_range" v-on="on 
-                    " :value= "formatteDate"
-                    readonly
-                    color="blue-grey"
-                    :rules="regrasData"
-                    >
-                    </v-text-field>
-                  </template>
-                </v-menu>
+              <v-text-field label= "Titulo" color="secondary" v-model="ticket.titulo" prepend-icon="folder" :rules ="regrasTitulo"> </v-text-field>
+              <v-text-field label= "Mensagem" color="secondary" v-model="ticket.mensagem" prepend-icon="message" :rules="regrasInfo"></v-text-field>
 
               <v-btn
-              @click="submit"
+              @click="adicionarTicket"
               text
-              class="success mx-0 mt-3"
+              block
+              class="primary mx-0 mt-3"
               :loading="carregando"
                             >
               Adicionar!
@@ -50,14 +37,17 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
+const { mapActions, mapState } = createNamespacedHelpers("moduloTicket");
 
 export default {
+  props: {
+    titulo: String
+  },
 data:()=>({
   ticket: {
     titulo:'',
-    informacao: '',
-    data: undefined,
-    
+    mensagem: '',
   },
   regrasTitulo: [
     v =>  v && v.length >= 3 || 'Tamanho mínimo é 3'
@@ -65,44 +55,32 @@ data:()=>({
   regrasInfo: [
     v =>  v && v.length >= 8 || 'Tamanho mínimo é 8'
   ],
-  regrasData: [
-    v =>  v && v.length >= 0 || 'É necessario escolher!'
-  ],
   dialog: false,
-  carregando: false
 }),
+  computed:{
+    ...mapState(['carregando','falhaCadastro','sucessoCadastro'])
+  
+  },
 methods: {
-  async submit(){
-        moment.locale('pt-br')
-    if(this.$refs.form.validate()){
-    this.carregando = true
-     await db.collection('projects').add( {
-        title: this.projeto.titulo,
-        content: this.projeto.informacao,
-        due: moment(this.projeto.data).format('LL'),
-        status: 'fazendo',
-        person: 'Guilherme'
-
+  ...mapActions(['criarTicket']),
+  async adicionarTicket() {
+      await this.criarTicket({
+        titulo : this.ticket.titulo,
+        mensagem : this.ticket.mensagem,
       }).then(()=>{
-        console.log('projeto adcionado')
         this.dialog = false
-        this.carregando = false
-        this.$emit('ticketAdicionado')
-         this.$refs.form.reset()
-        this.projeto = {}
+        this.$refs.form.reset()
+        this.$toast.success("Ticket cadasterado com sucesso!.", "Sucesso", {
+          position: "topRight"
+        })
+          
       })
-    }
 
-    else
-    console.log('wrong!')
+      console.log("Falha", this.falhaCadastro)
+      console.log("sucessso", this.sucessoCadastro)
   }
+  
 },
-computed:{
-  formatteDate(){
-    moment.locale('pt-br')
-    return this.projeto.data ? moment(this.projeto.data).format('LL') : ''
-  }
-}
 
 }
 </script>

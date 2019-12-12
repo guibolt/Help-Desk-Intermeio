@@ -1,8 +1,4 @@
-import Vue from "vue";
-import Vuex from "vuex";
 import axios from "axios";
-
-Vue.use(Vuex);
 
 const apiClient = axios.create({
   baseURL: process.env.VUE_APP_URL,

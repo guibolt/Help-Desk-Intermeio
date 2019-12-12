@@ -104,7 +104,7 @@
         <v-divider></v-divider>
       </v-card>
      </v-row>
-
+       <v-pagination v-model="pagina" length="2" circle @input="paginacao"></v-pagination>
   </v-container>
 </template>
 

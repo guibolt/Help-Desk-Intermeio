@@ -38,9 +38,6 @@
           <v-list-item-content >
             <v-list-item-title class="white--text">{{userName}}</v-list-item-title>
           </v-list-item-content>
-             <v-flex class=" mt-4 mb-3">
-              <TicketForm />
-          </v-flex>
           <v-list-item-content >
            <v-btn icon
            @click="mini = !mini"
@@ -53,6 +50,9 @@
 
         </v-list-item>
 
+             <v-flex class=" mt-4 mb-3">
+              <TicketForm :titulo="retornaTexto" />
+          </v-flex>
       
         <v-divider></v-divider>
 
@@ -74,10 +74,6 @@
                  
             </v-list-item-content>
           </v-list-item>
-      
-       
-           
-       
         </v-list>
       </v-list>
     </v-navigation-drawer>
@@ -94,6 +90,7 @@ export default {
    TicketForm    
   },
   data: () => ({
+    titulo: undefined,
     userName: "Joao",
     drawer: false,
     mini: false,
@@ -103,11 +100,6 @@ export default {
         title: "Dashboard",
         icon: "house",
         url: "/"
-      },
-      {
-        title: "Criar novo ticket",
-        icon: "fiber_new",
-        url: "/novoticket"
       },
       {
 
@@ -131,7 +123,14 @@ export default {
      async logout() {
        await this.Deslogar()
       this.$router.push("/login")
-    },
+    }
+    
+  },
+  computed: {
+    retornaTexto(){
+      return this.mini ? '': 'Novo Ticket'
+    }
   }
+
 };
 </script>
