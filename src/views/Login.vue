@@ -18,7 +18,9 @@ background: linear-gradient(to right, #1488cc, #6dd5ed); /* W3C, IE 10+/ Edge, F
           >
             <v-card class="elevation-12">
           <v-toolbar color="primary" dark>
-         
+            
+              <v-img :src="imagem"></v-img>
+           
             <v-toolbar-title class="font-weight-bold ">{{ texts.toolbar }}</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-progress-circular
@@ -115,7 +117,8 @@ export default {
       email: "",
       password: "",
       confirmPassword: ''
-    }
+    },
+    imagem: require("../assets/intermeio.PNG")
   }),
   validations() {
     const validations = {
