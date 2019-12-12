@@ -19,7 +19,6 @@ background: linear-gradient(to right, #1488cc, #6dd5ed); /* W3C, IE 10+/ Edge, F
             <v-card class="elevation-12">
           <v-toolbar color="primary" dark>
             
-              <v-img :src="imagem"></v-img>
            
             <v-toolbar-title class="font-weight-bold ">{{ texts.toolbar }}</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -117,8 +116,7 @@ export default {
       email: "",
       password: "",
       confirmPassword: ''
-    },
-    imagem: require("../assets/intermeio.PNG")
+    }
   }),
   validations() {
     const validations = {
@@ -129,7 +127,7 @@ export default {
         },
         password: {
           required,
-          minLength: minLength(6)
+          minLength: minLength(8)
         }
       }
     };
@@ -266,7 +264,7 @@ export default {
           this.$toast.success("Cadastro efetuado faça o login.", "Sucesso", {
           position: "topRight"
         });
-        this.$router.push("/login");
+          this.isLogin = true
         }
       }
     }
