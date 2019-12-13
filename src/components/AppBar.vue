@@ -105,7 +105,11 @@ export default {
         title: "Faq",
         icon: "question_answer",
         url: "/faq"
-      }
+      },
+      {
+        title: "Componente Teste",
+        icon: "create",
+        url: "/teste"      }
     ]
   }),
   methods: {

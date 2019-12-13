@@ -80,12 +80,18 @@
               <v-chip small 
               color="secondary">
              {{ ticket.numeroTicket }}</v-chip>
-              <v-btn icon class="ml-5">
+                <v-chip
+                    class="ma-2"
+                    color="primary"
+                    text-color="white"
+                    link
+                    @click="cliquei"
+                  >
                 Responder
-              <v-icon right>
+              <v-icon right small>
                 message
               </v-icon>
-           </v-btn>
+                </v-chip>
             </div>
           </v-flex>
         </v-layout>
@@ -125,7 +131,12 @@ data:()=>({
           numeroTicket: 201909000003
         },
   ]
-})
+}),
+methods: {
+  cliquei (){
+      alert('clicacdo!!')
+  }
+}
 }
 </script>
 

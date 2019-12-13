@@ -1,0 +1,42 @@
+{
+    "Usuario": [
+        {
+            "Id": "0e597338-1706-44e6-83ed-5e3a0d69f6db",
+            "nome": "fabio",
+            "email": "fabio@email.com",
+            "tipo": 1,
+            "senha": 123456,
+            "confirmacaoSenha": 123456
+        },
+        {
+            "Id": "9702ec60-7103-4433-87ec-c4a3e05f2979",
+            "nome": "Atendente",
+            "email": "atendente@email.com",
+            "tipo": 2,
+            "senha": 123456,
+            "confirmacaoSenha": 123456
+        }
+    ],
+    "ticket": {
+        "Id": "bb3a7712-993f-45da-af71-ce2c47ae0968",
+        "DataCadastro": "2019-09-18 14:00",
+        "Chamado": 201909000000001,
+        "ClienteId": "0e597338-1706-44e6-83ed-5e3a0d69f6db",
+        "AtendenteId": "9702ec60-7103-4433-87ec-c4a3e05f2979",
+        "Status": "false",
+        "Resposta": [
+            {
+                "Id": "9d05348e-222e-406e-bc4c-312327fc0161",
+                "DataCadastro": "2019-09-18 14:00",
+                "UsuarioId": "0e597338-1706-44e6-83ed-5e3a0d69f6db",
+                "Texto": "Estou com problema na CPU"
+            },
+            {
+                "Id": "36a9dc20-e540-48f9-a71f-13d4ccf720cc",
+                "DataCadastro": "2019-09-18 14:10",
+                "UsuarioId": "9702ec60-7103-4433-87ec-c4a3e05f2979",
+                "Texto": "Por favor explicar melhor, a CPU está ligando"
+            }
+        ]
+    }
+}

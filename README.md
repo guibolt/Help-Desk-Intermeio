@@ -1,4 +1,4 @@
-# projeto-tickets
+# new-school
 
 ## Project setup
 ```
