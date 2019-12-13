@@ -16,9 +16,12 @@ background: linear-gradient(to right, #1488cc, #6dd5ed); /* W3C, IE 10+/ Edge, F
             sm="8"
             md="4"
           >
+                <h1 class= " display-1 text-center font-weight-light white--text mb-3">HELP DESK <strong>INTERMEIO</strong></h1>
             <v-card class="elevation-12">
+            
           <v-toolbar color="primary" dark>
-         
+        
+
             <v-toolbar-title class="font-weight-bold ">{{ texts.toolbar }}</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-progress-circular
@@ -104,7 +107,6 @@ background: linear-gradient(to right, #1488cc, #6dd5ed); /* W3C, IE 10+/ Edge, F
 <script>
 import { required, email, minLength,sameAs } from "vuelidate/lib/validators";
 import { createNamespacedHelpers } from "vuex";
-import store from '../store';
 const { mapActions, mapState } = createNamespacedHelpers("login");
 export default {
   name: "Login",
@@ -118,9 +120,6 @@ export default {
       confirmPassword: ''
     }
   }),
-  created: function() {
-    if(store.state.SucessoLogin) this.$router.push("/dashboard");
-  },
   validations() {
     const validations = {
       user: {
@@ -130,7 +129,7 @@ export default {
         },
         password: {
           required,
-          minLength: minLength(6)
+          minLength: minLength(8)
         }
       }
     };
@@ -209,6 +208,9 @@ export default {
       return !this.$v.user.confirmPassword$invalid && this.$v.user.confirmPassword.$dirty
     }
   },
+      created: function() {
+      if(this.SucessoLogin) this.$router.push("/");
+    },
   methods: {
     ...mapActions(["Logar","Cadastrar"]),
     async submit() {
@@ -264,7 +266,7 @@ export default {
           this.$toast.success("Cadastro efetuado faça o login.", "Sucesso", {
           position: "topRight"
         });
-        this.$router.push("/");
+          this.isLogin = true
         }
       }
     }

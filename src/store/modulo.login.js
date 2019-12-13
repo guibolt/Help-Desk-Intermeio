@@ -1,8 +1,4 @@
-import Vue from "vue";
-import Vuex from "vuex";
 import axios from "axios";
-
-Vue.use(Vuex);
 
 const apiClient = axios.create({
   baseURL: process.env.VUE_APP_URL,
@@ -19,8 +15,9 @@ export const login = {
     ErroCadastro: null,
     SucessoLogin: false,
     nome: "",
-    tipo: "",
     email: "",
+    tipo: "",
+    tokenUsuario: "",
     ACarregar: false
   },
 
@@ -30,12 +27,14 @@ export const login = {
     FalhaLogar: (state, MensagemErro) => {
       state.ErrorLogin = MensagemErro;
       state.SucessoLogin = false;
+      state.ACarregar = false
     },
     LogOut: state => state.SucessoLogin = true,
     SucessoAoLogar: (state, resultado) => {
       if (resultado != null) {
         state.nome = resultado.nome;
         state.tipo = resultado.tipo;
+        state.tokenUsuario = resultado.tokenUsuario
         state.SucessoLogin = true;
       }
     },
@@ -71,6 +70,9 @@ export const login = {
           commit("SucessoAoLogar", resultado, resposta.data.status);
 
           localStorage.setItem("token", JSON.stringify(resultado));
+
+          this.state.tokenUsuario = localStorage.getItem("token");
+
         })
         .catch(erro => {
           //só cai no bloco catch se não conseguir se comunicar com a API...
