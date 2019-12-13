@@ -15,8 +15,9 @@ export const login = {
     ErroCadastro: null,
     SucessoLogin: false,
     nome: "",
-    tipo: "",
     email: "",
+    tipo: "",
+    tokenUsuario: "",
     ACarregar: false
   },
 
@@ -33,6 +34,7 @@ export const login = {
       if (resultado != null) {
         state.nome = resultado.nome;
         state.tipo = resultado.tipo;
+        state.tokenUsuario = resultado.tokenUsuario
         state.SucessoLogin = true;
       }
     },
@@ -68,6 +70,9 @@ export const login = {
           commit("SucessoAoLogar", resultado, resposta.data.status);
 
           localStorage.setItem("token", JSON.stringify(resultado));
+
+          this.state.tokenUsuario = localStorage.getItem("token");
+
         })
         .catch(erro => {
           //só cai no bloco catch se não conseguir se comunicar com a API...

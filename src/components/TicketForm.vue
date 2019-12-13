@@ -50,37 +50,40 @@ data:()=>({
     mensagem: '',
   },
   regrasTitulo: [
-    v =>  v && v.length >= 3 || 'Tamanho mínimo é 3'
+    v =>  v && v.length >= 5 || 'Tamanho mínimo é 5'
   ],
   regrasInfo: [
-    v =>  v && v.length >= 8 || 'Tamanho mínimo é 8'
+    v =>  v && v.length >= 10 || 'Tamanho mínimo é 10'
   ],
   dialog: false,
 }),
   computed:{
-    ...mapState(['carregando','falhaCadastro','sucessoCadastro'])
+    ...mapState(['carregando','falhaCadastro','sucessoCadastro', 'mensagem','statusCadastro'])
   
   },
 methods: {
   ...mapActions(['criarTicket']),
-  async adicionarTicket() {
+  
+  
+ async adicionarTicket() {
       await this.criarTicket({
         titulo : this.ticket.titulo,
         mensagem : this.ticket.mensagem,
       }).then(()=>{
+           if(this.statusCadastro){
+          this.$toast.success(`${this.mensagem}`, "Sucesso", {
+            position: "topRight"
+          })
         this.dialog = false
         this.$refs.form.reset()
-        this.$toast.success("Ticket cadasterado com sucesso!.", "Sucesso", {
+        } else {
+           this.$toast.error(`${this.mensagem}`, "Erro", {
           position: "topRight"
         })
-          
+        }
+
       })
-
-      console.log("Falha", this.falhaCadastro)
-      console.log("sucessso", this.sucessoCadastro)
+     }
   }
-  
-},
-
 }
 </script>

@@ -31,13 +31,14 @@
       <v-list nav dense >
         <v-list-item>
           <v-list-item-avatar>
-            <v-icon color="white">account_circle</v-icon>
+            <v-icon color="white">person</v-icon>
           </v-list-item-avatar>
           
 
           <v-list-item-content >
-            <v-list-item-title class="white--text">{{userName}}</v-list-item-title>
+            <v-list-item-title class="white--text subtitle-1">{{userName}}</v-list-item-title>
           </v-list-item-content>
+         
           <v-list-item-content >
            <v-btn icon
            @click="mini = !mini"
@@ -47,13 +48,29 @@
              </v-icon>
            </v-btn>
           </v-list-item-content>
-
         </v-list-item>
-
              <v-flex class=" mt-4 mb-3">
-              <TicketForm :titulo="retornaTexto" />
+               
+            <div class="  white--text mb-5 ml-5 subtitle-1  "   v-if="!mini">
+              <v-chip color="primary" class="ml-12">
+                    {{tipo}}
+              </v-chip>
+            </div>
+            <div v-else >
+                <v-avatar color="primary mb-3 ml-2">
+                  <span class="white--text headline" size="36" >{{tipo[0]}}</span>
+                </v-avatar>
+            </div>
+            <div v-if="tipo === 'CLIENTE'">
+              <TicketForm :titulo="retornaTextoCliente" />
+            </div>
+            <div v-else>
+             <TicketForm :titulo="retornaTextoAtendente" />
+            </div>
           </v-flex>
-      
+
+
+         
         <v-divider></v-divider>
 
         <v-divider></v-divider>
@@ -91,7 +108,7 @@ export default {
   },
   data: () => ({
     titulo: undefined,
-    userName: "Joao",
+    userName: "",
     drawer: false,
     mini: false,
     icon: undefined,
@@ -114,6 +131,10 @@ export default {
       }
     ]
   }),
+  created() {
+    console.log("nome =>>>",this.$store)
+      this.userName = this.nome
+  },
   methods: {
     ...mapActions(["Deslogar"]),
     ValidaERedireciona(item) {
@@ -127,8 +148,13 @@ export default {
     
   },
   computed: {
-    retornaTexto(){
+        ...mapState(['nome','tipo']),
+
+    retornaTextoCliente(){
       return this.mini ? '': 'Novo Ticket'
+    },
+    retornaTextoAtendente(){
+      return this.mini ? '': 'Tomar Posse'
     }
   }
 
