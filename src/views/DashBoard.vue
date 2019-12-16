@@ -63,7 +63,7 @@
             <div>{{ ticket.titulo }}</div>
           </v-flex>
           <v-flex xs6 sm4 md4>
-            <div class="caption blue--text">Descrição do Tciket</div>
+            <div class="caption blue--text">Descrição do Ticket</div>
             <div>{{ ticket.mensagem }}</div>
           </v-flex>
           <v-flex xs6 sm4 md2>
@@ -79,7 +79,7 @@
                 class="ml-5"
                 icon
                 @click="pegarTicket(ticket.numeroTicket)"
-                v-if="tipo === 'aberto'"
+                v-if="tipo === 'aberto' && tipoUsuario === 'ATENDENTE'"
               >
                 <strong>Tomar Posse</strong>
                 <v-icon right color="green">fiber_new</v-icon>
@@ -88,10 +88,14 @@
                 Responder
                 <v-icon right>message</v-icon>
               </v-btn>
-              <v-btn icon class="ml-5 mb-1 secondary--text" v-else>
+                  <v-btn 
+                  @click="dialog = true"
+                  icon class="ml-5 mb-1 secondary--text" v-else>
                 Visualizar
                 <v-icon right>remove_red_eye</v-icon>
               </v-btn>
+              <TicketView :Ticket="ticket" :dialog="dialog" />
+              
             </div>
           </v-flex>
         </v-layout>
@@ -112,17 +116,23 @@
 <script>
 import { createNamespacedHelpers } from "vuex";
 const { mapActions, mapState } = createNamespacedHelpers("moduloTicket");
+import TicketView from '@/components/TicketView.vue'
 export default {
+  components: {
+    TicketView
+  },
   data: () => ({
     pagina: 1,
     tipo: undefined,
+    tipoUsuario: undefined,
     cards: [
       { title: "TICKETS ABERTOS" },
       { title: "Tickets em andamento" },
       { title: "Tickets Concluídos" }
     ],
     listaTickets: [],
-    paginacaoAtual: undefined
+    paginacaoAtual: undefined,
+    dialog : false
   }),
   computed: {
     ...mapState([
@@ -216,6 +226,7 @@ export default {
   },
   async created() {
     await this.buscarQtd();
+    this.tipoUsuario = JSON.parse(localStorage.getItem("token")).tipo
   }
 };
 </script>
@@ -225,4 +236,5 @@ export default {
   border-left: 4px solid #1e88e5;
   border-right: 4px solid #1e88e5;
 }
+
 </style>

@@ -137,7 +137,7 @@ export default {
       {
         title: "Faq",
         icon: "question_answer",
-        url: "/faq"
+        url: "/cliente"
       }
     ]
      break;
