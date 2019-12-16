@@ -29,7 +29,7 @@
           </v-toolbar>
          
       
-      <div class="mt-5 font-weight-bold subheading"  >
+      <div class="mt-5 font-weight-bold subheading text-center"  >
         Atualmente há 
         <v-progress-circular
               v-show="carregando"
@@ -42,10 +42,9 @@
         </v-avatar>
          {{card.title}}
       </div>
-    <v-btn icon class="font-weight-bold py-2" small
+    <v-btn icon class="font-weight-bold py-2" block
     @click="setaALista(card)"
      >
-   
        Visualizar
        <v-icon
        right
