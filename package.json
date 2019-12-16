@@ -21,6 +21,7 @@
     "vue-axios": "^2.1.5",
     "vue-chat-widget": "^0.3.1",
     "vue-izitoast": "^1.2.1",
+    "vue-perfect-scrollbar": "^0.2.1",
     "vue-router": "^3.1.3",
     "vue-social-sharing": "^2.4.7",
     "vue-the-mask": "^0.11.1",
@@ -40,11 +41,6 @@
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-vuetify": "^2.0.2",
     "vue-template-compiler": "^2.6.10",
-    "vuetify-loader": "^1.3.0",
-    "babel-core": "^6.26.3"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+    "vuetify-loader": "^1.3.0"
+  }
 }

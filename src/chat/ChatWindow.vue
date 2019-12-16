@@ -10,7 +10,7 @@
       <v-toolbar-title> <h4>TICKET</h4></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-tooltip bottom>
-        <v-btn icon slot="activator">
+        <v-btn icon slot="activator" @click="mostraChat= false">
           <v-icon color="text--secondary">close</v-icon>
         </v-btn>
         <span>Fechar Chat</span>
@@ -63,6 +63,9 @@ export default {
       default: null
     }
   },
+  data: ()=> ({
+    mostraChat: true
+  }),
   computed: {
     chat() {
       let chatOrigin = {

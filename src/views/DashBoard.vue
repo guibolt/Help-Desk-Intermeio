@@ -85,7 +85,7 @@
                 <strong>Tomar Posse</strong>
                 <v-icon right color="green">fiber_new</v-icon>
               </v-btn>
-              <v-btn icon class="ml-5" v-else-if="tipo === 'andamento'">
+              <v-btn icon class="ml-5" v-else-if="tipo === 'andamento'" @click="mostrarChat = !mostrarChat">
                 Responder
                 <v-icon right>message</v-icon>
               </v-btn>
@@ -107,17 +107,35 @@
         color="primary "
       ></v-pagination>
     </v-row>
-
+         <v-dialog
+              class="mx-auto pa-6 transition-swing"
+              v-model="mostrarChat"
+              persistent
+              max-width="700"
+              @click.stop="mostrarChat = true"
+            >
+              <template v-slot:activator="{ on }"></template>
+              <v-card>
+                <v-card-title>
+              <v-btn icon slot="activator" @click="mostrarChat= false">
+                <v-icon color="text--secondary">close</v-icon>
+              </v-btn>
+              </v-card-title>
+                <Chat />
+                </v-card>
+            </v-dialog>
+          </v-col>
   </v-container>
 </template>
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-import Chat from '../components/Chat.vue'
+import Chat from '@/chat/ChatWindow'
 const { mapActions, mapState } = createNamespacedHelpers("moduloTicket");
 export default {
 
   data: () => ({
+    mostrarChat: false,
     pagina: 1,
     tipo: undefined,
     cards: [
