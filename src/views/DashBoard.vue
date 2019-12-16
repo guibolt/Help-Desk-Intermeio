@@ -102,13 +102,13 @@
               <v-chip small 
               color="secondary">
              {{ ticket.numeroTicket }}</v-chip>
-              <v-btn  icon class="ml-5">
+              <v-chip  icon class="ml-5" link color="primary" outlined>
 
                 Responder
               <v-icon right small>
                 message
               </v-icon>
-                </v-btn>
+                </v-chip>
             </div>
           </v-flex>
         </v-layout>
