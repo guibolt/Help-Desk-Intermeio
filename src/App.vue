@@ -12,14 +12,13 @@
 <script>
 import AppBar from '@/components/AppBar.vue'
 export default {
+  name: 'App',
   components: {
     AppBar
+  },
+    created(){
+      if (localStorage.getItem("token"))
+       this.$router.push("/login");
   }
-  //   created(){
-  //     if (localStorage.getItem("token")) this.$router.push("/login");
-  //   console.log('Route:', this.$route)
-  // }
-,
-  name: 'App',
 };
 </script>

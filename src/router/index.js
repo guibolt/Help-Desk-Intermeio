@@ -37,7 +37,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   /*Configura as rotas que nao precisam de autorizacao*/
-  const publicPages = ["/", "/login"];
+  const publicPages = ["/login"];
 
   //Verifica se a rota que o usuario quer precisa ou não de autorizacao
   const authRequired = !publicPages.includes(to.path);
