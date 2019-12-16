@@ -1,24 +1,30 @@
 <template>
- <v-app style="
+  <v-app style="
     background: #8e9eab;
      ">
     <v-content>
-      <AppBar v-if="$route.path !== '/login'" />
-      <router-view/>
+      <AppBar :Itens="itensDrawer" v-if="$route.path !== '/login' " />
+      <router-view />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import AppBar from '@/components/AppBar.vue'
+import AppBar from "@/components/AppBar.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
     AppBar
   },
-    created(){
-      if (localStorage.getItem("token"))
-       this.$router.push("/login");
-  }
-};
+  data:()=>({
+    itensDrawer: undefined
+  }),
+  created() {
+
+    if ( localStorage.getItem("token")) 
+       this.$router.push("/");
+    
+  },
+ 
+}
 </script>
