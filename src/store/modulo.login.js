@@ -23,18 +23,18 @@ export const login = {
 
   mutations: {
     //essa área eu declaro meus commit's e oque eles vão receber...
-    Carregado: state => state.ACarregar = true,
+    Carregado: state => (state.ACarregar = true),
     FalhaLogar: (state, MensagemErro) => {
       state.ErrorLogin = MensagemErro;
       state.SucessoLogin = false;
-      state.ACarregar = false
+      state.ACarregar = false;
     },
-    LogOut: state => state.SucessoLogin = true,
+    LogOut: state => (state.SucessoLogin = true),
     SucessoAoLogar: (state, resultado) => {
       if (resultado != null) {
         state.nome = resultado.nome;
         state.tipo = resultado.tipo;
-        state.tokenUsuario = resultado.tokenUsuario
+        state.tokenUsuario = resultado.tokenUsuario;
         state.SucessoLogin = true;
       }
     },
@@ -72,7 +72,6 @@ export const login = {
           localStorage.setItem("token", JSON.stringify(resultado));
 
           this.state.tokenUsuario = localStorage.getItem("token");
-
         })
         .catch(erro => {
           //só cai no bloco catch se não conseguir se comunicar com a API...
@@ -98,10 +97,10 @@ export const login = {
           commit("ErroCadastro", erro.message);
         });
     },
-    async Deslogar({commit}) {
+    async Deslogar({ commit }) {
       commit("Carregado");
       localStorage.removeItem("token");
-      commit("LogOut",false);
+      commit("LogOut", false);
     }
   }
 };
