@@ -102,8 +102,7 @@
               <v-chip small 
               color="secondary">
              {{ ticket.numeroTicket }}</v-chip>
-              <v-chip  icon class="ml-5" link color="primary" outlined>
-
+              <v-chip  icon class="ml-5" link color="primary" outlined @click="mostrarChat = !mostrarChat">
                 Responder
               <v-icon right small>
                 message
@@ -116,15 +115,25 @@
       </v-card>
        <v-pagination v-model="pagina" :length="paginacaoGeral" circle @input="paginacao" v-show="listaTickets.length >0" color="primary " ></v-pagination>
      </v-row>
-    
+     <v-row justify="center">
+              <v-dialog v-model="mostrarChat" persistent max-width="350">
+                <template v-slot:activator="{ on }"></template>
+                <Chat   iconColorProp="#e6e6e6"
+        messageOutColorProp="#4d9e93"
+        messageInColorProp="#f1f0f0"
+        messageBackgroundColorProp="#ffffff" />
+              </v-dialog>
+     </v-row>
   </v-container>
 </template>
 
 <script>
 import { createNamespacedHelpers } from "vuex";
+import Chat from '../components/Chat.vue'
 const { mapActions, mapState } = createNamespacedHelpers("moduloTicket");
 export default {
 data:()=>({
+  mostrarChat: false,
   pagina: 1,
   tipo: undefined,
   cards:[
@@ -134,6 +143,9 @@ data:()=>({
     ],
     listaTickets: []
 }),
+components: {
+  Chat
+},
 computed: {
   ...mapState(['totalAbertos','totalFechados',
                 'totalAndamento','carregando',

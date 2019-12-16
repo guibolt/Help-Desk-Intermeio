@@ -36,7 +36,7 @@
           
 
           <v-list-item-content >
-            <v-list-item-title class="white--text subtitle-1">{{userName}}</v-list-item-title>
+            <v-list-item-title class="white--text subtitle-1">{{ userName[0].toUpperCase() + userName.slice(1).toLowerCase()}}</v-list-item-title>
           </v-list-item-content>
          
           <v-list-item-content >
@@ -137,7 +137,7 @@ export default {
   }),
   created() {
     console.log("nome =>>>",this.$store)
-      this.userName = this.nome
+    this.userName = this.nome
   },
   methods: {
     ...mapActions(["Deslogar"]),
@@ -148,19 +148,19 @@ export default {
      async logout() {
        await this.Deslogar()
       this.$router.push("/login")
-    }
-    
+    },
   },
   computed: {
         ...mapState(['nome','tipo']),
-
     retornaTextoCliente(){
       return this.mini ? '': 'Novo Ticket'
     },
+    // titulo1(nome){
+    //     return nome[0].toUpperCase() + nome.slice(1, nome.length -1).toLowerCase()
+    //   },
     retornaTextoAtendente(){
       return this.mini ? '': 'Tomar Posse'
     }
   }
-
 };
 </script>

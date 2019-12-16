@@ -6,6 +6,7 @@ import Axios from "axios";
 import vuetify from "./plugins/vuetify";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "material-design-icons-iconfont/dist/material-design-icons.css";
+import feather from 'vue-icon'
 
 Vue.config.productionTip = false;
 import Vuelidate from "vuelidate";
@@ -15,6 +16,7 @@ import VueIziToast from 'vue-izitoast';
 import 'izitoast/dist/css/iziToast.css';
 Vue.use(VueIziToast)
 Vue.use(Vuelidate);
+Vue.use(feather, 'v-icon')
 
 new Vue({
   router,
