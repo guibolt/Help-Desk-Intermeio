@@ -25,7 +25,7 @@
             <v-card 
               v-else
             tile
-            height="450"
+            height="500"
             width="500"
             class="ml-10"
           

@@ -3,12 +3,12 @@
     <vue-perfect-scrollbar class="chat-room--scrollbar grey lighten-5">
       <v-card-text class="chat-room--list pa-3">
         <template v-for="(item, index) in umTicket.lstRespostas">
-          <div :class="[item.usuario.nome === 'ZEE' ? 'reverse' : '']" class="messaging-item layout row my-4" :key="index">
+          <div :class="[item.usuario.nome === nome ? 'reverse' : '']" class="messaging-item layout row my-4" :key="index">
             <v-avatar class="indigo mx-1" size="40" color="primary">
               {{item.usuario.nome[0]}}
             </v-avatar>
             <div class="messaging--body layout column mx-2">
-              <p :value="true" :class="[item.usuario.nome === 'ZEE' ? 'primary white--text' : 'white']" class="pa-2">
+              <p :value="true" :class="[item.usuario.nome === nome ? 'primary white--text' : 'white']" class="pa-2">
                 {{ item.mensagem }}
               </p>
               <div class="caption px-2 text--secondary">
@@ -45,7 +45,8 @@ export default {
     }
   },
   data: ()=> ({
-    mostraChat: true
+    mostraChat: true,
+    nome: ''
   }),
   computed: {
      ...mapState(['umTicket','numeroTicket'])
@@ -55,7 +56,7 @@ export default {
       ...mapActions(['buscarOTicket'])
   },
   async created() {
-     
+     this.nome =  JSON.parse(localStorage.getItem("token")).nome
     if(this.number !== undefined)
     await this.buscarOTicket(this.number)
   }
