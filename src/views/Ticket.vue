@@ -13,11 +13,22 @@
             sm="8"
             md="4"
           >
+
+         
+              <h1  v-if="!umTicket" class="white--text text-center font-weight-light display-2 mt-10">Selecione um ticket no Dashboard para visualizar
+                  <v-btn class="primary mt-5"   @click="$router.push('/')">
+                    Voltar
+                  </v-btn>
+
+              </h1>
+
             <v-card 
+              v-else
             tile
             height="400"
             width="500"
             class="ml-10"
+          
             >
               <v-toolbar
                 color="primary"
@@ -37,7 +48,10 @@
                </v-row>
               </v-toolbar>
              
-         
+
+                
+
+
                 <v-card-text class="title" >
                   <v-chip color="primary" large >
 
@@ -63,8 +77,8 @@
                   Status: {{umTicket.dataCadastro}}
                   </v-card-text>
               
-            </v-card>
             <h2 class="text-center white--text">Chat</h2>
+            </v-card>
           </v-col>
         </v-row>
       </v-container>
@@ -86,7 +100,10 @@ methods:{
 },
 async created(){
   let number = this.numeroTicket
+    if(number !== undefined){
   await this.buscarOTicket(number)
+  }
+ 
 }
 }
 </script>
