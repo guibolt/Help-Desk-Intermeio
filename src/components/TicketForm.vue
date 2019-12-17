@@ -49,8 +49,10 @@ import { createNamespacedHelpers } from "vuex";
 const { mapActions, mapState } = createNamespacedHelpers("moduloTicket");
 
 export default {
+  props:{
+    titulo: String
+  },
   data: () => ({
-    titulo: "Novo Ticket",
     ticket: {
       titulo: "",
       mensagem: ""
