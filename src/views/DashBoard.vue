@@ -63,7 +63,7 @@
             <div>{{ ticket.titulo }}</div>
           </v-flex>
           <v-flex xs6 sm4 md4>
-            <div class="caption blue--text">Descrição do Tciket</div>
+            <div class="caption blue--text">Descrição do Ticket</div>
             <div>{{ ticket.mensagem }}</div>
           </v-flex>
           <v-flex xs6 sm4 md2>
@@ -80,7 +80,7 @@
                 class="ml-5"
                 icon
                 @click="pegarTicket(ticket.numeroTicket)"
-                v-if="tipo === 'aberto'"
+                v-if="tipo === 'aberto' && tipoUsuario === 'ATENDENTE'"
               >
                 <strong>Tomar Posse</strong>
                 <v-icon right color="green">fiber_new</v-icon>
@@ -89,10 +89,13 @@
                 Responder
                 <v-icon right>message</v-icon>
               </v-btn>
-              <v-btn icon class="ml-5 mb-1 secondary--text" v-else>
+                 <v-btn 
+                  @click="selecionarTicket(ticket.numeroTicket)"
+                  icon class="ml-5 mb-1 secondary--text" v-else>
                 Visualizar
                 <v-icon right>remove_red_eye</v-icon>
               </v-btn>
+                 
             </div>
             <v-dialog
               class="mx-auto pa-6 transition-swing"
@@ -129,21 +132,23 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-import Chat from '@/chat/ChatWindow'
-const { mapActions, mapState } = createNamespacedHelpers("moduloTicket");
+const { mapActions, mapState, mapMutations } = createNamespacedHelpers("moduloTicket");
+
 export default {
 
   data: () => ({
     mostrarChat: false,
     pagina: 1,
     tipo: undefined,
+    tipoUsuario: undefined,
     cards: [
       { title: "TICKETS ABERTOS" },
       { title: "Tickets em andamento" },
       { title: "Tickets Concluídos" }
     ],
     listaTickets: [],
-    paginacaoAtual: undefined
+    paginacaoAtual: undefined,
+    dialog : false
   }),
   components: {
     Chat
@@ -236,10 +241,17 @@ export default {
       });
       await this.buscarQtd();
       await this.buscaTickets();
+    },
+    ...mapMutations(['setarNumeroTicket']),
+    selecionarTicket(numeroticket){
+      
+      this.setarNumeroTicket(numeroticket)
+      this.$router.push('/ticket')
     }
   },
   async created() {
     await this.buscarQtd();
+    this.tipoUsuario = JSON.parse(localStorage.getItem("token")).tipo
   }
 };
 
@@ -250,4 +262,5 @@ export default {
   border-left: 4px solid #1e88e5;
   border-right: 4px solid #1e88e5;
 }
+
 </style>
