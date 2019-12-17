@@ -85,35 +85,18 @@
                 <strong>Tomar Posse</strong>
                 <v-icon right color="green">fiber_new</v-icon>
               </v-btn>
-              <v-btn icon class="ml-5" v-else-if="tipo === 'andamento'" @click="mostrarChat = !mostrarChat">
+              <v-chip icon class="ml-5" v-else-if="tipo === 'andamento'" link color="primary" outlined="" @click="selecionarTicket(ticket.numeroTicket)">
                 Responder
                 <v-icon right>message</v-icon>
-              </v-btn>
-                 <v-btn 
+              </v-chip>
+                 <v-chip  color="primary" outlined link
                   @click="selecionarTicket(ticket.numeroTicket)"
                   icon class="ml-5 mb-1 secondary--text" v-else>
                 Visualizar
                 <v-icon right>remove_red_eye</v-icon>
-              </v-btn>
+              </v-chip>
                  
             </div>
-            <v-dialog
-              class="mx-auto pa-6 transition-swing"
-              v-model="mostrarChat"
-              persistent
-              max-width="700"
-              @click.stop="mostrarChat = true"
-            >
-              <template v-slot:activator="{ on }"></template>
-              <v-card>
-                <v-card-title>
-              <v-btn icon slot="activator" @click="mostrarChat= false">
-                <v-icon color="text--secondary">close</v-icon>
-              </v-btn>
-              </v-card-title>
-                <Chat v-bind:obj="{ticket}" v-bind:uuid="ticket.id"/>
-                </v-card>
-            </v-dialog>
           </v-flex>
         </v-layout>
         <v-divider></v-divider>
@@ -132,12 +115,12 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
+
 const { mapActions, mapState, mapMutations } = createNamespacedHelpers("moduloTicket");
 
 export default {
 
   data: () => ({
-    mostrarChat: false,
     pagina: 1,
     tipo: undefined,
     tipoUsuario: undefined,
@@ -150,9 +133,6 @@ export default {
     paginacaoAtual: undefined,
     dialog : false
   }),
-  components: {
-    Chat
-  },
   computed: {
     ...mapState([
       "totalAbertos",

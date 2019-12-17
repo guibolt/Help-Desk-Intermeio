@@ -143,17 +143,9 @@ export default {
       {
         title: "Faq",
         icon: "question_answer",
-<<<<<<< HEAD
-        url: "/faq"
-      },
-      {
-        title: "Componente Teste",
-        icon: "create",
-        url: "/teste"      }
-=======
         url: "/cliente"
       }
->>>>>>> master
+
     ]
 
      break;

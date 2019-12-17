@@ -25,7 +25,7 @@
             <v-card 
               v-else
             tile
-            height="400"
+            height="450"
             width="500"
             class="ml-10"
           
@@ -47,11 +47,6 @@
                 </v-toolbar-title>
                </v-row>
               </v-toolbar>
-             
-
-                
-
-
                 <v-card-text class="title" >
                   <v-chip color="primary" large >
 
@@ -77,7 +72,29 @@
                   Status: {{umTicket.dataCadastro}}
                   </v-card-text>
               
-            <h2 class="text-center white--text">Chat</h2>
+              <v-card-actions>
+                <v-btn @click="mostrarChat = !mostrarChat">Chat</v-btn>
+              </v-card-actions>
+                <v-dialog 
+              class="mx-auto pa-6 transition-swing"
+              v-model="mostrarChat"
+              persistent
+              max-width="700"
+              @click.stop="mostrarChat = true"
+            >
+              <template v-slot:activator="{ on }"></template>
+              <v-card>
+                <v-card-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-title> <h4>{{umTicket.titulo}}</h4></v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-btn icon slot="activator" @click="mostrarChat= false">
+                <v-icon color="text--secondary" >close</v-icon>
+              </v-btn>
+              </v-card-title>
+                <Chat :number="umTicket.numeroTicket"/>
+                </v-card>
+            </v-dialog>
             </v-card>
           </v-col>
         </v-row>
@@ -89,12 +106,19 @@
 <script>
 import { createNamespacedHelpers } from "vuex";
 const { mapActions, mapState } = createNamespacedHelpers("moduloTicket");
+import Chat from '../chat/ChatWindow.vue'
+
 
 export default {
+  data: () => ({
+  mostrarChat: false,
+  }),
   computed:{
     ...mapState(['umTicket','numeroTicket'])
   },
-
+   components: {
+    Chat
+  },
 methods:{
   ...mapActions(['buscarOTicket'])
 },

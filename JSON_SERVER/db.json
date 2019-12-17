@@ -17,51 +17,136 @@
             "confirmacaoSenha": 123456
         }
     ],
-    "ticket": [
-        "status": true,
-        "resultado": {
-          "id": "9026cd92-4835-4a32-afaa-cdd773d23c93",
-          "dataCadastro": "27/09/2019 15:58:59",
-          "numeroTicket": 201909000004,
-          "status": 4,
-          "titulo": "Teste do Naruto ",
-          "mensagem": "Me ajudem a virar Hokage !!! ",
+    "ticket": 
+    {
+      "status": true,
+      "resultado": {
+          "id": "d7b7cab0-de26-4fb9-a3d5-a44c840b60c6",
+          "dataCadastro": "13/12/2019 13:55:10",
+          "numeroTicket": 201912000074,
+          "status": 3,
+          "titulo": "Rafael Ajudando kk ",
+          "mensagem": "Rafael é um ninja um monstro sagrado!",
           "lstRespostas": [
-            {
-              "usuario": {
-                "nome": "ANDRE CLIENTE",
-                "email": "ANDRECLIENTE@DEV4JOBS.COM",
-                "tipo": "CLIENTE"
+              {
+                  "mensagem": "ddwdqwdawadadwdadwad",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:32"
               },
-              "anexo": {
-                "nomeArquivo": "TesteTicket.txt"
+              {
+                  "mensagem": "Oi ",
+                  "usuario": {
+                      "nome": "RAFAEL",
+                      "email": "RAFAELJUNIOR@1DEV4JOBS.COM",
+                      "tipo": "ATENDENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:06:43"
               },
-              "dataCadastro": "16/12/2019 12:07:01"
-            },
-            {
-              "usuario": {
-                "nome": "ANDRE CLIENTE",
-                "email": "ANDRECLIENTE@DEV4JOBS.COM",
-                "tipo": "CLIENTE"
+              {
+                  "mensagem": "dadawdqwdawdawda",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:10"
               },
-              "anexo": {
-                "nomeArquivo": "FumeKnight.jpg"
+              {
+                  "mensagem": "asd3q2deadadaesw",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:38"
               },
-              "dataCadastro": "16/12/2019 12:53:10"
-            },
-            {
-              "usuario": {
-                "nome": "ANDRE CLIENTE",
-                "email": "ANDRECLIENTE@DEV4JOBS.COM",
-                "tipo": "CLIENTE"
+              {
+                  "mensagem": "Tudo Bem ? ",
+                  "usuario": {
+                      "nome": "RAFAEL",
+                      "email": "RAFAELJUNIOR@1DEV4JOBS.COM",
+                      "tipo": "ATENDENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:06:51"
               },
-              "anexo": {
-                "nomeArquivo": "LivroDoJogador.pdf"
+              {
+                  "mensagem": "dfdsffadaswdawda",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:47"
               },
-              "dataCadastro": "12/12/2019 11:58:47"
-            }
+              {
+                  "mensagem": "Posso ajudar ? ",
+                  "usuario": {
+                      "nome": "RAFAEL",
+                      "email": "RAFAELJUNIOR@1DEV4JOBS.COM",
+                      "tipo": "ATENDENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:07:17"
+              },
+              {
+                  "mensagem": "um carro novo ",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:30:54"
+              },
+              {
+                  "mensagem": "Eu preciso de dinheiro ",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:30:47"
+              },
+              {
+                  "mensagem": "dsadadwad",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:05"
+              },
+              {
+                  "mensagem": "dadwdawddwdawda",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:25"
+              },
+              {
+                  "mensagem": "Oque você precisa meu filho ? \n",
+                  "usuario": {
+                      "nome": "RAFAEL",
+                      "email": "RAFAELJUNIOR@1DEV4JOBS.COM",
+                      "tipo": "ATENDENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:07:07"
+              },
+              {
+                  "mensagem": "sdadasdwdaaw",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:01"
+              }
           ],
-          "avaliacao": 4
-        }
-    ]
+          "avaliacao": 0
+      }
+  }
 }
