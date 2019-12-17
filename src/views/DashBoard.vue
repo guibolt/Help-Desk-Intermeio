@@ -88,14 +88,13 @@
                 Responder
                 <v-icon right>message</v-icon>
               </v-btn>
-                  <v-btn 
-                  @click="dialog = true"
+                 <v-btn 
+                  @click="selecionarTicket(ticket.numeroTicket)"
                   icon class="ml-5 mb-1 secondary--text" v-else>
                 Visualizar
                 <v-icon right>remove_red_eye</v-icon>
               </v-btn>
-              <TicketView :Ticket="ticket" :dialog="dialog" />
-              
+                 
             </div>
           </v-flex>
         </v-layout>
@@ -115,12 +114,8 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-const { mapActions, mapState } = createNamespacedHelpers("moduloTicket");
-import TicketView from '@/components/TicketView.vue'
+const { mapActions, mapState, mapMutations } = createNamespacedHelpers("moduloTicket");
 export default {
-  components: {
-    TicketView
-  },
   data: () => ({
     pagina: 1,
     tipo: undefined,
@@ -222,6 +217,12 @@ export default {
       });
       await this.buscarQtd();
       await this.buscaTickets();
+    },
+    ...mapMutations(['setarNumeroTicket']),
+    selecionarTicket(numeroticket){
+      
+      this.setarNumeroTicket(numeroticket)
+      this.$router.push('/ticket')
     }
   },
   async created() {

@@ -5,7 +5,7 @@
       <v-divider class="mx-4" inset vertical></v-divider>
       <v-btn @click="$router.push('/')" text>
         <v-toolbar-title text app class="text-uppercase">
-          <span class="font-weight-light">Help-Desk</span>
+          <span class="font-weight-light">Help-Desk </span>
           <span>Intermeio</span>
         </v-toolbar-title>
       </v-btn>
@@ -114,6 +114,11 @@ export default {
         icon: "house",
         url: "/"
       },
+       {
+        title: "Ticket",
+        icon: "view_list",
+        url: "/ticket"
+      },
       {
         title: "Chat",
         icon: "view_list",
@@ -130,9 +135,9 @@ export default {
         url: "/"
       },
       {
-        title: "Tickets",
+        title: "Ticket",
         icon: "view_list",
-        url: "/tickets"
+        url: "/ticket"
       },
       {
         title: "Faq",

@@ -21,7 +21,9 @@ export const moduloTicket = {
     paginacaoConcluido: null,
     totalAbertos: null,
     totalFechados: null,
-    totalAndamento: null
+    totalAndamento: null,
+    umTicket: undefined,
+    numeroTicket: undefined
   },
   mutations: {
     loading: state => (state.carregando = true),
@@ -66,7 +68,11 @@ export const moduloTicket = {
     tomarPosseTicket: (state, { dados }) => {
       state.statusReq = dados.status;
       state.mensagem = dados.mensagem;
-    }
+    },
+    buscarUmTicket: (state, ticket) => state.umTicket = ticket
+    ,
+    setarNumeroTicket: (state,numeroTicket) => state.numeroTicket = numeroTicket
+      
   },
   actions: {
     async criarTicket({ commit }, umTicket) {
@@ -190,6 +196,19 @@ export const moduloTicket = {
         .catch(error => {
           commit("cadastroFalha", error.message);
         });
+    },
+    async buscarOTicket({commit}, numeroTicket){
+      await apiClient.get(`/Tickets/${numeroTicket}`,{
+        headers: {
+          autorToken: JSON.parse(localStorage.getItem("token")).tokenUsuario
+        }
+      }).then(resp =>{
+        console.log("Busca do ticket Realizada!:", resp.data)
+      
+          commit("buscarUmTicket",resp.data.resultado)
+      }).catch(error => {
+        commit("cadastroFalha", error.message);
+      });
     }
   }
 };
