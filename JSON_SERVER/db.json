@@ -17,26 +17,51 @@
             "confirmacaoSenha": 123456
         }
     ],
-    "ticket": {
-        "Id": "bb3a7712-993f-45da-af71-ce2c47ae0968",
-        "DataCadastro": "2019-09-18 14:00",
-        "Chamado": 201909000000001,
-        "ClienteId": "0e597338-1706-44e6-83ed-5e3a0d69f6db",
-        "AtendenteId": "9702ec60-7103-4433-87ec-c4a3e05f2979",
-        "Status": "false",
-        "Resposta": [
+    "ticket": [
+        "status": true,
+        "resultado": {
+          "id": "9026cd92-4835-4a32-afaa-cdd773d23c93",
+          "dataCadastro": "27/09/2019 15:58:59",
+          "numeroTicket": 201909000004,
+          "status": 4,
+          "titulo": "Teste do Naruto ",
+          "mensagem": "Me ajudem a virar Hokage !!! ",
+          "lstRespostas": [
             {
-                "Id": "9d05348e-222e-406e-bc4c-312327fc0161",
-                "DataCadastro": "2019-09-18 14:00",
-                "UsuarioId": "0e597338-1706-44e6-83ed-5e3a0d69f6db",
-                "Texto": "Estou com problema na CPU"
+              "usuario": {
+                "nome": "ANDRE CLIENTE",
+                "email": "ANDRECLIENTE@DEV4JOBS.COM",
+                "tipo": "CLIENTE"
+              },
+              "anexo": {
+                "nomeArquivo": "TesteTicket.txt"
+              },
+              "dataCadastro": "16/12/2019 12:07:01"
             },
             {
-                "Id": "36a9dc20-e540-48f9-a71f-13d4ccf720cc",
-                "DataCadastro": "2019-09-18 14:10",
-                "UsuarioId": "9702ec60-7103-4433-87ec-c4a3e05f2979",
-                "Texto": "Por favor explicar melhor, a CPU está ligando"
+              "usuario": {
+                "nome": "ANDRE CLIENTE",
+                "email": "ANDRECLIENTE@DEV4JOBS.COM",
+                "tipo": "CLIENTE"
+              },
+              "anexo": {
+                "nomeArquivo": "FumeKnight.jpg"
+              },
+              "dataCadastro": "16/12/2019 12:53:10"
+            },
+            {
+              "usuario": {
+                "nome": "ANDRE CLIENTE",
+                "email": "ANDRECLIENTE@DEV4JOBS.COM",
+                "tipo": "CLIENTE"
+              },
+              "anexo": {
+                "nomeArquivo": "LivroDoJogador.pdf"
+              },
+              "dataCadastro": "12/12/2019 11:58:47"
             }
-        ]
-    }
+          ],
+          "avaliacao": 4
+        }
+    ]
 }

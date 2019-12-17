@@ -94,20 +94,7 @@
                 <v-icon right>remove_red_eye</v-icon>
               </v-btn>
             </div>
-          </v-flex>
-        </v-layout>
-        <v-divider></v-divider>
-      </v-card>
-      <v-pagination
-        v-model="pagina"
-        :length="paginacaoAtual"
-        circle
-        @input="buscaTickets"
-        v-show="listaTickets.length >0"
-        color="primary "
-      ></v-pagination>
-    </v-row>
-         <v-dialog
+            <v-dialog
               class="mx-auto pa-6 transition-swing"
               v-model="mostrarChat"
               persistent
@@ -121,10 +108,22 @@
                 <v-icon color="text--secondary">close</v-icon>
               </v-btn>
               </v-card-title>
-                <Chat />
+                <Chat v-bind:obj="{ticket}" v-bind:uuid="ticket.id"/>
                 </v-card>
             </v-dialog>
-          </v-col>
+          </v-flex>
+        </v-layout>
+        <v-divider></v-divider>
+      </v-card>
+      <v-pagination
+        v-model="pagina"
+        :length="paginacaoAtual"
+        circle
+        @input="buscaTickets"
+        v-show="listaTickets.length >0"
+        color="primary "
+      ></v-pagination>
+    </v-row>
   </v-container>
 </template>
 
