@@ -17,7 +17,7 @@ background: linear-gradient(to right, #1488cc, #6dd5ed); /* W3C, IE 10+/ Edge, F
               <v-toolbar color="primary" dark>
                 <v-toolbar-title class="font-weight-bold">{{ texts.toolbar }}</v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-progress-circular v-show="isLoading" indeterminate color="white" width="5"></v-progress-circular>
+                <v-progress-circular v-if="ACarregar" indeterminate color="white" width="5"></v-progress-circular>
               </v-toolbar>
               <v-card-text>
                 <v-form @keyup.native.enter="submit">
@@ -93,7 +93,6 @@ export default {
   name: "Login",
   data: () => ({
     isLogin: true, //isso que diferencia
-    isLoading: false,
     user: {
       name: "",
       email: "",
@@ -208,7 +207,6 @@ export default {
     ...mapActions(["Logar", "Cadastrar"]),
     async submit() {
       if (this.isLogin) {
-        this.isLoading = this.ACarregar;
 
         if (this.user.email === "" && this.user.senha === "")
           return this.$toast.warning("Preencha os campos", "Alerta", {
@@ -236,7 +234,6 @@ export default {
           }
         }
       } else {
-        this.isLoading = this.ACarregar;
         await this.Cadastrar({
           nome: this.user.name,
           email: this.user.email,

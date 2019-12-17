@@ -53,7 +53,7 @@
             </v-avatar>
           </div>
           <div v-if="tipo === 'CLIENTE'">
-            <TicketForm :titulo="retornaTexto"/>
+            <TicketForm   :titulo="retornaTexto" />
           </div>
         </v-flex>
 
@@ -159,10 +159,10 @@ export default {
      retornaTexto(){
       return this.mini ? '': 'Novo Ticket'
     }, 
+
   },
    created() {
-     console.log("nome =>>>", this.$store);
-     this.userName = this.nome;
+    this.userName = this.nome;
     this.setaItensDrawer(this.tipo)
    },
 }

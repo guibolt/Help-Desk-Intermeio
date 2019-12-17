@@ -84,6 +84,7 @@ export default {
           });
           this.dialog = false;
           this.$refs.form.reset();
+          this.$emit('TicketAdicionado')
         } else {
           this.$toast.error(`${this.mensagem}`, "Erro", {
             position: "topRight"

@@ -20,11 +20,9 @@ export default {
     itensDrawer: undefined
   }),
   created() {
-
     if ( localStorage.getItem("token")) 
        this.$router.push("/");
-    
-  },
+  }
  
 }
 </script>

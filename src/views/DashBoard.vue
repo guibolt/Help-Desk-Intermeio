@@ -226,7 +226,7 @@ export default {
     }
   },
   async created() {
-    await this.buscarQtd();
+      await this.buscarQtd();
     this.tipoUsuario = JSON.parse(localStorage.getItem("token")).tipo
   }
 };
