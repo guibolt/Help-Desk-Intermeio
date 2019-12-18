@@ -13,8 +13,6 @@
             sm="8"
             md="4"
           >
-
-         
               <h1  v-if="!umTicket" class="white--text text-center font-weight-light display-2 mt-10">Selecione um ticket no Dashboard para visualizar
                   <v-btn class="primary mt-5"   @click="$router.push('/')">
                     Voltar
@@ -116,12 +114,13 @@ export default {
   computed:{
     ...mapState(['umTicket','numeroTicket'])
   },
+  methods:{
+  ...mapActions(['buscarOTicket'])
+},
    components: {
     Chat
   },
-methods:{
-  ...mapActions(['buscarOTicket'])
-},
+
 async created(){
   let number = this.numeroTicket
     if(number !== undefined){

@@ -20,18 +20,24 @@
         </template>
       </v-card-text>
     </vue-perfect-scrollbar>
-    <v-card-actions>
-      <v-text-field  flat clearable solo append-icon="send" label="Escreva sua mensagem aqui.">
-        <v-icon slot="append-icon">send</v-icon>
-        <v-icon slot="append-icon" class="mx-2">photo</v-icon>
-        <v-icon slot="append-icon">face</v-icon>
-      </v-text-field>
+     <v-text-field v-model="resposta.mensagem" flat clearable outlined label="Escreva sua mensagem aqui." ></v-text-field>   
+    <v-card-actions>   
+    
+     <v-layout>
+        <v-flex>
+          <v-file-input show-size counter chips  label="Insira o Anexo"  v-model="arquivo"></v-file-input>
+        </v-flex>
+        <v-flex>
+          <v-btn color="primary" text @click="verificarStado">Clique</v-btn>
+        </v-flex>
+      </v-layout>
+
+      <v-btn @click="verificarStado()"><v-icon >send</v-icon></v-btn>
     </v-card-actions>
   </v-card>
 </template>
 <script>
-import { createNamespacedHelpers } from "vuex";
-const { mapActions, mapState } = createNamespacedHelpers("moduloTicket");
+import { mapState, mapActions } from "vuex";
 import VuePerfectScrollbar from "vue-perfect-scrollbar"
 
 export default {
@@ -46,19 +52,51 @@ export default {
   },
   data: ()=> ({
     mostraChat: true,
-    nome: ''
+    arquivo: null,
+    nome: '',
+    resposta: {
+      mensagem: "",
+      ticketId: "",
+      anexo: {}
+    }
   }),
   computed: {
-     ...mapState(['umTicket','numeroTicket'])
+   ...mapState('moduloTicket',['umTicket','numeroTicket']),
+   ...mapState('resposta',['falhaEnviar','enviando','carregando'])
   },
 
   methods: {
-      ...mapActions(['buscarOTicket'])
+  ...mapActions('moduloTicket',['buscarOTicket']),
+  ...mapActions('resposta',['Responder']),
+    async resposta(id) {
+      await this.Responder({
+        mensagem: this.resposta.mensagem,
+        ticketId: id,
+        anexo: this.resposta.anexo
+      });
+
+      if (this.falhaEnviar != null) {
+        const toast = this.$toast;
+        this.falhaEnviar.forEach(function(item, indice, array) {
+          toast.error(item, "Erro", {
+            position: "topRight",
+            timeout: 6000
+          });
+        });
+      }
+
+      this.mensagem = "";
+      await this.buscarOTicket(this.number);
+    },
+    verificarStado() {
+      console.log("Resposta.anexo => ", this.arquivo)
+    }
   },
   async created() {
      this.nome =  JSON.parse(localStorage.getItem("token")).nome
-    if(this.number !== undefined)
+    if(this.number !== undefined){
     await this.buscarOTicket(this.number)
   }
+}
 }
 </script>
