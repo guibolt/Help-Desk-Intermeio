@@ -4,18 +4,18 @@ const apiClient = axios.create({
   baseURL: process.env.VUE_APP_URL
 });
 
-export const resposta ={
+export const moduloResposta ={
     namespaced: true,
     state: {
         enviando: false,
         falhaEnviar: null,
-        carregando = false
+        carregando: false
     },
-    mudations: {
+    mutations: {
         carregar: state => state.carregando = true,
-        PostarResposta: (state) => {
+        PostarResposta: (state, resultado) => {
             state.carregando = false,
-            state.falhaEnviar = null 
+            state.falhaEnviar = false 
         }, 
          cadastroFalha: (state, resultado) => {
             state.falhaEnviar = resultado;

@@ -22,17 +22,13 @@
     </vue-perfect-scrollbar>
      <v-text-field v-model="resposta.mensagem" flat clearable outlined label="Escreva sua mensagem aqui." ></v-text-field>   
     <v-card-actions>   
-    
-     <v-layout>
+      <v-spacer></v-spacer>
         <v-flex>
           <v-file-input show-size counter chips  label="Insira o Anexo"  v-model="arquivo"></v-file-input>
         </v-flex>
-        <v-flex>
-          <v-btn color="primary" text @click="verificarStado">Clique</v-btn>
-        </v-flex>
-      </v-layout>
-
-      <v-btn @click="verificarStado()"><v-icon >send</v-icon></v-btn>
+        <v-spacer></v-spacer>
+      <v-btn @click="EnviarMensagem(umTicket.id)"><v-icon >send</v-icon></v-btn>
+      <v-spacer></v-spacer>
     </v-card-actions>
   </v-card>
 </template>
@@ -55,24 +51,62 @@ export default {
     arquivo: null,
     nome: '',
     resposta: {
-      mensagem: "",
-      ticketId: "",
-      anexo: {}
+      mensagem: null,
+      ticketId: null,
+      anexo: {
+             nomeArquivo : null,
+             Arquivo : null
+      },
     }
   }),
   computed: {
-   ...mapState('moduloTicket',['umTicket','numeroTicket']),
-   ...mapState('resposta',['falhaEnviar','enviando','carregando'])
+   ...mapState('moduloTicket',['umTicket','numeroTicket'],'moduloResposta',['falhaEnviar'])
   },
 
   methods: {
   ...mapActions('moduloTicket',['buscarOTicket']),
-  ...mapActions('resposta',['Responder']),
-    async resposta(id) {
+  ...mapActions('moduloResposta',['Responder']),
+    async EnviarMensagem(id) {
+      console.log("Arquivo => ", this.arquivo)
+     
+        let arquivoBase64;
+
+        const toBase64 = file =>  {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () =>  pegarBase(reader.result)
+        }
+
+        function getBase64(file) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+              pegarBase(render.result)
+          };
+            reader.onerror = function (error) {
+              console.log('Error: ', error);
+            };
+          }
+
+       function pegarBase(base64){
+             arquivoBase64 = base64
+
+             return console.log("pegarBase 1 function => ", arquivoBase64)
+          }
+
+
+      this.resposta.anexo.nomeArquivo = this.arquivo.name
+      this.resposta.anexo.Arquivo = toBase64(this.arquivo)
+      this.resposta.ticketId = id
+
+      console.log('arquivo tem nome => ',this.resposta.anexo.nomeArquivo )
+      console.log("Arquivo anexo => ",  this.resposta.anexo.Arquivo)
+      console.log("ArquivoBase64  ", arquivoBase64)
+
       await this.Responder({
         mensagem: this.resposta.mensagem,
-        ticketId: id,
-        anexo: this.resposta.anexo
+        ticketId: this.resposta.ticketId ,
+        anexo: this.resposta.anexo.nomeArquivo === null ? null : this.resposta.anexo 
       });
 
       if (this.falhaEnviar != null) {
@@ -87,9 +121,6 @@ export default {
 
       this.mensagem = "";
       await this.buscarOTicket(this.number);
-    },
-    verificarStado() {
-      console.log("Resposta.anexo => ", this.arquivo)
     }
   },
   async created() {
