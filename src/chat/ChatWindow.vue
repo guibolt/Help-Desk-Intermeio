@@ -24,7 +24,7 @@
     <v-card-actions>   
       <v-spacer></v-spacer>
         <v-flex>
-          <v-file-input show-size counter chips  label="Insira o Anexo"  v-model="arquivo"></v-file-input>
+          <v-file-input id="result" show-size counter chips  label="Insira o Anexo"  v-model="arquivo"></v-file-input>
         </v-flex>
         <v-spacer></v-spacer>
       <v-btn @click="EnviarMensagem(umTicket.id)"><v-icon >send</v-icon></v-btn>
@@ -67,42 +67,13 @@ export default {
   ...mapActions('moduloTicket',['buscarOTicket']),
   ...mapActions('moduloResposta',['Responder']),
     async EnviarMensagem(id) {
-      console.log("Arquivo => ", this.arquivo)
-     
-        let arquivoBase64;
 
-        const toBase64 = file =>  {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-             reader.onload = () => pegarBase(reader.result)
-        }
-
-        function getBase64(file) {
-            var reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function () {
-              pegarBase(render.result)
-          };
-            reader.onerror = function (error) {
-              console.log('Error: ', error);
-            };
-          }
-
-       function pegarBase(base64){
-             arquivoBase64 = base64
-
-             return console.log("pegarBase 1 function => ", arquivoBase64)
-          }
-
-      toBase64(this.arquivo)
-
+      
       this.resposta.anexo.nomeArquivo = this.arquivo.name
-      this.resposta.anexo.Arquivo = arquivoBase64
+      // this.resposta.anexo.Arquivo = 
       this.resposta.ticketId = id
 
-      console.log('arquivo tem nome => ',this.resposta.anexo.nomeArquivo )
-      console.log("Arquivo anexo => ",  this.resposta.anexo.Arquivo)
-      console.log("ArquivoBase64  ", arquivoBase64)
+    
 
       await this.Responder({
         mensagem: this.resposta.mensagem,
