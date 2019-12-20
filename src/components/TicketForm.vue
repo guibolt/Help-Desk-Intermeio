@@ -71,7 +71,7 @@ export default {
     ])
   },
   methods: {
-    ...mapActions(["criarTicket"]),
+    ...mapActions(["criarTicket","buscarQtd"]),
 
     async adicionarTicket() {
       await this.criarTicket({
@@ -84,7 +84,7 @@ export default {
           });
           this.dialog = false;
           this.$refs.form.reset();
-          this.$emit('TicketAdicionado')
+          this.buscarQtd()
         } else {
           this.$toast.error(`${this.mensagem}`, "Erro", {
             position: "topRight"

@@ -3,7 +3,7 @@ const apiClient = axios.create({
   baseURL: process.env.VUE_APP_URL
 });
 
-export default  {
+export default {
   async criarTicket({ commit }, umTicket) {
     commit("loading");
     await apiClient
@@ -25,10 +25,7 @@ export default  {
         commit("cadastroFalha", error.message);
       });
   },
-  async buscaPaginada(
-    { commit },
-    { status, numeroPagina, quantidadePagina }
-  ) {
+  async buscaPaginada({ commit }, { status, numeroPagina, quantidadePagina }) {
     commit("loading");
     if (numeroPagina === undefined) numeroPagina = 1;
     if (quantidadePagina === undefined) quantidadePagina = 10;
@@ -55,7 +52,6 @@ export default  {
   async buscarQtd({ commit }) {
     commit("loadingNumbers");
 
-
     //uscar quantidade de tickets em aberto
     let abertos = await apiClient.get(
       "/Tickets/Todos/aberto?numeroPagina=1&quantidadePagina=10",
@@ -64,10 +60,9 @@ export default  {
           autorToken: JSON.parse(localStorage.getItem("token")).tokenUsuario
         }
       }
-    )
-    
+    );
+
     commit("buscaTickets", { status: "aberto", dados: abertos.data });
-    console.log("aberto", abertos.data.paginacao.totalDeRegistros? abertos.data.paginacao.totalDeRegistros:0);
 
     //buscar quantidade de tickets em andamento
     let andamentos = await apiClient.get(
@@ -77,9 +72,8 @@ export default  {
           autorToken: JSON.parse(localStorage.getItem("token")).tokenUsuario
         }
       }
-    )
+    );
 
-    console.log("andamentos", andamentos.data.paginacao.totalDeRegistros? andamentos.data.paginacao.totalDeRegistros:0);
     commit("buscaTickets", { status: "andamento", dados: andamentos.data });
 
     //buscar quantidade de tickets concluido
@@ -91,23 +85,45 @@ export default  {
         }
       }
     );
-    
-    console.log("fechados", fechados.data.paginacao.totalDeRegistros? fechados.data.paginacao.totalDeRegistros:0);
+
     commit("buscaTickets", { status: "concluido", dados: fechados.data });
 
-    const dados = {
-      abertos: abertos.data.paginacao.totalDeRegistros? abertos.data.paginacao.totalDeRegistros:0 ,
-      andamentos: andamentos.data.paginacao.totalDeRegistros? andamentos.data.paginacao.totalDeRegistros:0,
-      fechados: fechados.data.paginacao.totalDeRegistros? fechados.data.paginacao.totalDeRegistros:0
-    };
-    commit("buscarNumeros", { dados });
 
-    const totalPag = {
-      totalPaginasA: abertos.data.paginacao.totalPaginas,
-      totalPaginasC: fechados.data.paginacao.totalPaginas,
-      totalPaginasAn: andamentos.data.paginacao.totalPaginas
-    };
-    commit("setarPaginacao", { totalPag });
+    if (!abertos.data.status) {
+      abertos = {
+        data: {
+          paginacao: {
+            totalDeRegistros: undefined
+          }
+        }
+      };
+    }
+    if (!andamentos.data.status) {
+      andamentos = {
+        data: {
+          paginacao: {
+            totalDeRegistros: undefined
+          }
+        }
+      };
+    }
+    if (!fechados.data.status) {
+      fechados = {
+        data: {
+          paginacao: {
+            totalDeRegistros: undefined
+          }
+        }
+      };
+    }
+
+    commit("setaTotalAbertos", abertos.data.paginacao.totalDeRegistros);
+    commit("setaTotalAndamento", andamentos.data.paginacao.totalDeRegistros);
+    commit("setaTotalFechados", fechados.data.paginacao.totalDeRegistros);
+
+    commit("setaPaginacaoAbertos", abertos.data.paginacao.totalPaginas);
+    commit("setaPaginacaoFechados", fechados.data.paginacao.totalPaginas);
+    commit("setaPaginacaoAndamentos", andamentos.data.paginacao.totalPaginas);
   },
   async tomarPosse({ commit }, numeroTicket) {
     commit("carregandoPosse");
@@ -130,17 +146,21 @@ export default  {
         commit("cadastroFalha", error.message);
       });
   },
-  async buscarOTicket({commit}, numeroTicket){
-    await apiClient.get(`/Tickets/${numeroTicket}`,{
-      headers: {
-        autorToken: JSON.parse(localStorage.getItem("token")).tokenUsuario
-      }
-    }).then(resp =>{
-      console.log("Busca do ticket Realizada!:", resp.data)
-    
-        commit("buscarUmTicket",resp.data.resultado)
-    }).catch(error => {
-      commit("cadastroFalha", error.message);
-    });
-  }
-}
+  async buscarOTicket({ commit }, numeroTicket) {
+    await apiClient
+      .get(`/Tickets/${numeroTicket}`, {
+        headers: {
+          autorToken: JSON.parse(localStorage.getItem("token")).tokenUsuario
+        }
+      })
+      .then(resp => {
+        console.log("Busca do ticket Realizada!:", resp.data);
+
+        commit("buscarUmTicket", resp.data.resultado);
+      })
+      .catch(error => {
+        commit("cadastroFalha", error.message);
+      });
+  },
+  chamaReset: ({ commit }) => commit("resetStore")
+};

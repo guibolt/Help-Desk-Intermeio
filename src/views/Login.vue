@@ -88,7 +88,7 @@ background: linear-gradient(to right, #1488cc, #6dd5ed); /* W3C, IE 10+/ Edge, F
 <script>
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import { createNamespacedHelpers } from "vuex";
-const { mapActions, mapState } = createNamespacedHelpers("login");
+const { mapActions, mapState, mapMutations } = createNamespacedHelpers("login");
 export default {
   name: "Login",
   data: () => ({
@@ -207,7 +207,6 @@ export default {
     ...mapActions(["Logar", "Cadastrar"]),
     async submit() {
       if (this.isLogin) {
-
         if (this.user.email === "" && this.user.senha === "")
           return this.$toast.warning("Preencha os campos", "Alerta", {
             position: "topRight",
@@ -219,7 +218,7 @@ export default {
           senha: this.user.password
         });
 
-        if (this.SucessoLogin === true) {
+        if (this.SucessoLogin) {
           this.$router.push("/");
         } else {
           const toast = this.$toast;
@@ -229,6 +228,7 @@ export default {
                 position: "topRight"
               });
             });
+            this.ErrorLogin = null
           } else {
             console.log("Erro no Login.");
           }
@@ -250,11 +250,13 @@ export default {
               timeout: 9000
             });
           });
+          
         } else {
           this.$toast.success("Cadastro efetuado faça o login.", "Sucesso", {
             position: "topRight"
           });
           this.isLogin = true;
+          this.ErroCadastro = null
         }
       }
     }

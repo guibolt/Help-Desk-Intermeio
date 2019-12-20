@@ -23,13 +23,13 @@ export const login = {
 
   mutations: {
     //essa área eu declaro meus commit's e oque eles vão receber...
-    Carregado: state => state.ACarregar = true,
+    Carregado: state => (state.ACarregar = true),
     FalhaLogar: (state, MensagemErro) => {
       state.ErrorLogin = MensagemErro;
       state.SucessoLogin = false;
       state.ACarregar = false;
     },
-    LogOut: state => state.ACarregar = false,
+    LogOut: state => (state.SucessoLogin = true),
     SucessoAoLogar: (state, resultado) => {
       if (resultado != null) {
         state.nome = resultado.nome;
@@ -38,10 +38,11 @@ export const login = {
         state.SucessoLogin = true;
       }
     },
-    CadastrarUsuario: (state, DadosCadastro) => {
+    usuario: (state, DadosCadastro) => {
       state.nome = DadosCadastro.nome;
       state.email = DadosCadastro.email;
       state.ACarregar = false;
+      state.ErroCadastro = null;
     },
     ErroCadastro: (state, MensagemErro) => {
       state.ErroCadastro = MensagemErro;
@@ -90,7 +91,7 @@ export const login = {
           if (resposta.data.status == false)
             return commit("ErroCadastro", resultado);
 
-          commit("CadastrarUsuario", resultado);
+          commit("usuario", resultado);
         })
         .catch(erro => {
           commit("ErroCadastro", erro.message);

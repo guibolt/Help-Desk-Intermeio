@@ -40,13 +40,21 @@
     >Selecione uma categoria para visualizar os tickets</h1>
 
     <v-row v-else justify="center" align="center">
-      <h1 class="subheading white--text text-center mt-5 font-weight-light text-uppercase">
+      <h1
+        class="subheading white--text text-center mt-5 font-weight-light text-uppercase"
+        v-show="!validaArray"
+      >
         Tickets
         <v-icon color="white" size="40">forum</v-icon>
       </h1>
     </v-row>
     <v-row justify="center" align="center" class="mt-5">
       <v-progress-circular v-show="carregando" indeterminate color="white" width="4" size="100"></v-progress-circular>
+
+      <h1
+        class="white--text text-center font-weight-light display-2 mt-10"
+        v-if="validaArray"
+      >{{listaTickets[0]}}</h1>
 
       <v-card
         flat
@@ -56,6 +64,7 @@
         class="mb-1"
         shaped
         v-show="!carregando"
+        v-else
       >
         <v-layout row wrap class="pa-3 ticket">
           <v-flex xs12 md4>
@@ -88,13 +97,15 @@
                 Responder
                 <v-icon right>message</v-icon>
               </v-btn>
-                 <v-btn 
-                  @click="selecionarTicket(ticket.numeroTicket)"
-                  icon class="ml-5 mb-1 secondary--text" v-else>
+              <v-btn
+                @click="selecionarTicket(ticket.numeroTicket)"
+                icon
+                class="ml-5 mb-1 secondary--text"
+                v-else
+              >
                 Visualizar
                 <v-icon right>remove_red_eye</v-icon>
               </v-btn>
-                 
             </div>
           </v-flex>
         </v-layout>
@@ -105,7 +116,7 @@
         :length="paginacaoAtual"
         circle
         @input="buscaTickets"
-        v-show="listaTickets.length >0"
+        v-show="listaTickets.length >0 && !validaArray"
         color="primary "
       ></v-pagination>
     </v-row>
@@ -114,12 +125,15 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-const { mapActions, mapState, mapMutations } = createNamespacedHelpers("moduloTicket");
+const { mapActions, mapState, mapMutations } = createNamespacedHelpers(
+  "moduloTicket"
+);
 export default {
   data: () => ({
     pagina: 1,
-    tipo: undefined,
+    tipo: "",
     tipoUsuario: undefined,
+    showTicket: true,
     cards: [
       { title: "TICKETS ABERTOS" },
       { title: "Tickets em andamento" },
@@ -127,7 +141,7 @@ export default {
     ],
     listaTickets: [],
     paginacaoAtual: undefined,
-    dialog : false
+    dialog: false
   }),
   computed: {
     ...mapState([
@@ -145,10 +159,41 @@ export default {
       "statusReq",
       "mensagem",
       "carregandoPosse"
-    ])
+    ]),
+    validaArray() {
+      switch (this.tipo) {
+        case "aberto":
+          return (
+            this.listaTickets.length === 1 &&
+            this.listaTickets[0] === "Você não tem tickets abertos no momento!"
+          );
+
+        case "andamento":
+          return (
+            this.listaTickets.length === 1 &&
+            this.listaTickets[0] ===
+              "Você não tem tickets andamentos no momento!"
+          );
+          break;
+
+        case "concluido":
+          return (
+            this.listaTickets.length === 1 &&
+            this.listaTickets[0] ===
+              "Você não tem tickets concluidos no momento!"
+          );
+          break;
+      }
+    }
   },
   methods: {
-    ...mapActions(["buscarQtd", "resetarStore", "buscaPaginada", "tomarPosse"]),
+    ...mapActions([
+      "buscarQtd",
+      "resetarStore",
+      "buscaPaginada",
+      "tomarPosse",
+      "chamaReset"
+    ]),
     retornaQuantidade(card) {
       switch (card.title) {
         case "TICKETS ABERTOS":
@@ -186,7 +231,6 @@ export default {
       }
     },
     async buscaTickets(pagina) {
-      console.log("eaeae");
       await this.buscaPaginada({ status: this.tipo, numeroPagina: pagina });
       switch (this.tipo) {
         case "aberto":
@@ -218,16 +262,18 @@ export default {
       await this.buscarQtd();
       await this.buscaTickets();
     },
-    ...mapMutations(['setarNumeroTicket']),
-    selecionarTicket(numeroticket){
-      
-      this.setarNumeroTicket(numeroticket)
-      this.$router.push('/ticket')
+    ...mapMutations(["setarNumeroTicket"]),
+    selecionarTicket(numeroticket) {
+      this.setarNumeroTicket(numeroticket);
+      this.$router.push("/ticket");
     }
   },
   async created() {
-      await this.buscarQtd();
-    this.tipoUsuario = JSON.parse(localStorage.getItem("token")).tipo
+    await this.buscarQtd();
+    this.tipoUsuario = JSON.parse(localStorage.getItem("token")).tipo;
+  },
+  destroyed() {
+    this.chamaReset();
   }
 };
 </script>
@@ -237,5 +283,4 @@ export default {
   border-left: 4px solid #1e88e5;
   border-right: 4px solid #1e88e5;
 }
-
 </style>

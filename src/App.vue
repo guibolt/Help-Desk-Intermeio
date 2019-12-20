@@ -23,6 +23,5 @@ export default {
     if ( localStorage.getItem("token")) 
        this.$router.push("/");
   }
- 
 }
 </script>
