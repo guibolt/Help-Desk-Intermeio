@@ -1,0 +1,152 @@
+{
+    "Usuario": [
+        {
+            "Id": "0e597338-1706-44e6-83ed-5e3a0d69f6db",
+            "nome": "fabio",
+            "email": "fabio@email.com",
+            "tipo": 1,
+            "senha": 123456,
+            "confirmacaoSenha": 123456
+        },
+        {
+            "Id": "9702ec60-7103-4433-87ec-c4a3e05f2979",
+            "nome": "Atendente",
+            "email": "atendente@email.com",
+            "tipo": 2,
+            "senha": 123456,
+            "confirmacaoSenha": 123456
+        }
+    ],
+    "ticket": 
+    {
+      "status": true,
+      "resultado": {
+          "id": "d7b7cab0-de26-4fb9-a3d5-a44c840b60c6",
+          "dataCadastro": "13/12/2019 13:55:10",
+          "numeroTicket": 201912000074,
+          "status": 3,
+          "titulo": "Rafael Ajudando kk ",
+          "mensagem": "Rafael é um ninja um monstro sagrado!",
+          "lstRespostas": [
+              {
+                  "mensagem": "ddwdqwdawadadwdadwad",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:32"
+              },
+              {
+                  "mensagem": "Oi ",
+                  "usuario": {
+                      "nome": "RAFAEL",
+                      "email": "RAFAELJUNIOR@1DEV4JOBS.COM",
+                      "tipo": "ATENDENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:06:43"
+              },
+              {
+                  "mensagem": "dadawdqwdawdawda",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:10"
+              },
+              {
+                  "mensagem": "asd3q2deadadaesw",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:38"
+              },
+              {
+                  "mensagem": "Tudo Bem ? ",
+                  "usuario": {
+                      "nome": "RAFAEL",
+                      "email": "RAFAELJUNIOR@1DEV4JOBS.COM",
+                      "tipo": "ATENDENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:06:51"
+              },
+              {
+                  "mensagem": "dfdsffadaswdawda",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:47"
+              },
+              {
+                  "mensagem": "Posso ajudar ? ",
+                  "usuario": {
+                      "nome": "RAFAEL",
+                      "email": "RAFAELJUNIOR@1DEV4JOBS.COM",
+                      "tipo": "ATENDENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:07:17"
+              },
+              {
+                  "mensagem": "um carro novo ",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:30:54"
+              },
+              {
+                  "mensagem": "Eu preciso de dinheiro ",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:30:47"
+              },
+              {
+                  "mensagem": "dsadadwad",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:05"
+              },
+              {
+                  "mensagem": "dadwdawddwdawda",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:25"
+              },
+              {
+                  "mensagem": "Oque você precisa meu filho ? \n",
+                  "usuario": {
+                      "nome": "RAFAEL",
+                      "email": "RAFAELJUNIOR@1DEV4JOBS.COM",
+                      "tipo": "ATENDENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:07:07"
+              },
+              {
+                  "mensagem": "sdadasdwdaaw",
+                  "usuario": {
+                      "nome": "ZEE",
+                      "email": "ZE@DEVS.COM",
+                      "tipo": "CLIENTE"
+                  },
+                  "dataCadastro": "17/12/2019 19:31:01"
+              }
+          ],
+          "avaliacao": 0
+      }
+  }
+}

@@ -83,6 +83,7 @@
           <v-flex xs2 sm4 md2>
             <div class="caption blue--text">Número</div>
             <div class="right">
+
               <v-chip small color="secondary">{{ ticket.numeroTicket }}</v-chip>
               <v-btn
                 class="ml-5"
@@ -93,19 +94,18 @@
                 <strong>Tomar Posse</strong>
                 <v-icon right color="green">fiber_new</v-icon>
               </v-btn>
-              <v-btn icon class="ml-5" v-else-if="tipo === 'andamento'">
+              <v-chip icon class="ml-5" v-else-if="tipo === 'andamento'" link color="primary" outlined="" @click="selecionarTicket(ticket.numeroTicket)">
                 Responder
                 <v-icon right>message</v-icon>
-              </v-btn>
-              <v-btn
-                @click="selecionarTicket(ticket.numeroTicket)"
-                icon
-                class="ml-5 mb-1 secondary--text"
-                v-else
-              >
+                
+              </v-chip>
+                 <v-chip  color="primary" outlined link
+                  @click="selecionarTicket(ticket.numeroTicket)"
+                  icon class="ml-5 mb-1 secondary--text" v-else>
                 Visualizar
                 <v-icon right>remove_red_eye</v-icon>
-              </v-btn>
+              </v-chip>
+                 
             </div>
           </v-flex>
         </v-layout>
@@ -125,10 +125,11 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-const { mapActions, mapState, mapMutations } = createNamespacedHelpers(
-  "moduloTicket"
-);
+
+const { mapActions, mapState, mapMutations } = createNamespacedHelpers("moduloTicket");
+
 export default {
+
   data: () => ({
     pagina: 1,
     tipo: "",
@@ -276,6 +277,7 @@ export default {
     this.chamaReset();
   }
 };
+
 </script>
 
 <style>

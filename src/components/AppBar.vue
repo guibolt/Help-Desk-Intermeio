@@ -33,8 +33,9 @@
             <v-icon color="white">person</v-icon>
           </v-list-item-avatar>
 
-          <v-list-item-content>
-            <v-list-item-title class="white--text subtitle-1">{{userName}}</v-list-item-title>
+
+          <v-list-item-content >
+            <v-list-item-title class="white--text subtitle-1">{{ userName[0].toUpperCase() + userName.slice(1).toLowerCase()}}</v-list-item-title>
           </v-list-item-content>
 
           <v-list-item-content>
@@ -144,7 +145,9 @@ export default {
         icon: "question_answer",
         url: "/cliente"
       }
+
     ]
+
      break;
 
         case "ADM":
