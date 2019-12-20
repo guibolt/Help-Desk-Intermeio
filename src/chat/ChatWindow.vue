@@ -74,7 +74,7 @@ export default {
         const toBase64 = file =>  {
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onload = () =>  pegarBase(reader.result)
+             reader.onload = () => pegarBase(reader.result)
         }
 
         function getBase64(file) {
@@ -94,9 +94,10 @@ export default {
              return console.log("pegarBase 1 function => ", arquivoBase64)
           }
 
+      toBase64(this.arquivo)
 
       this.resposta.anexo.nomeArquivo = this.arquivo.name
-      this.resposta.anexo.Arquivo = toBase64(this.arquivo)
+      this.resposta.anexo.Arquivo = arquivoBase64
       this.resposta.ticketId = id
 
       console.log('arquivo tem nome => ',this.resposta.anexo.nomeArquivo )
