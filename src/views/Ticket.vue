@@ -75,18 +75,11 @@
                         >
                     <strong class="ml-10 mr-5">Status:</strong>
                     
-                   {{umTicket.status}}
+                   {{setaStatusTicket(umTicket)}}
                     
                     </v-row>
-                    <v-row class="mt-5 mb-5" align="center"
-                        
-                        >
-                    <strong class="ml-10 mr-5">Tipos de Status:</strong>
-                        1 = Aberto, 3 = Andamento
-                    
-                    </v-row>
-              
-              <v-card-actions v-if="umTicket.status === 3">
+                  
+              <v-card-actions v-show="umTicket.status === 1 | umTicket.status === 2 | umTicket.status === 3 ">
                  <v-btn block color="primary"  dark @click="mostrarChat = !mostrarChat">Chat</v-btn>
               </v-card-actions> 
                 <v-dialog 
@@ -120,8 +113,7 @@
 <script>
 import { createNamespacedHelpers } from "vuex";
 const { mapActions, mapState } = createNamespacedHelpers("moduloTicket");
-import Chat from '../chat/ChatWindow.vue'
-
+import Chat from '../components/ChatWindow.vue'
 
 export default {
 
@@ -132,18 +124,26 @@ export default {
     ...mapState(['umTicket','numeroTicket'])
   },
   methods:{
-  ...mapActions(['buscarOTicket'])
+  ...mapActions(['buscarOTicket']),
+  setaStatusTicket(ticket){
+     switch (ticket.status) {
+        case 1:
+          console.log("Aberto!", ticket.status)
+          return "Aberto";
+        case 2 && 3:
+          return "Em andamento";
+        case 4 : 
+        return "Concluído"
+      }
+  }
 },
    components: {
     Chat
   },
-
 async created(){
-  let number = this.numeroTicket
-    if(number !== undefined){
-  await this.buscarOTicket(number)
-
-  }
+   if(this.numeroTicket !== undefined){
+  await this.buscarOTicket(this.numeroTicket)
+ }
 }
 }
 </script>
