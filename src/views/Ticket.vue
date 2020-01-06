@@ -59,7 +59,7 @@
             >
               <v-btn block outlined color="primary" dark @click="mostrarChat = !mostrarChat">Chat</v-btn>
             </v-card-actions>
-            <v-card-actions>
+            <v-card-actions v-if="umTicket.status === 2 | umTicket.status === 3 ">
               <v-btn block outlined color="secondary" dark @click="dialog = !dialog ">Concluir ticket</v-btn>
             </v-card-actions>
 
@@ -91,73 +91,8 @@
         </v-btn>
         </v-col>
       </v-card-title>
-
-
-      
-      
-  
     </v-card>
   </v-dialog>
-
-       
-
-  
-                    <v-row class="mt-5 mb-5" align="center"
-                         
-                        >
-                    <strong class="ml-10 mr-5 ">Número de identificação:</strong>
-                    
-                    <ins >{{ umTicket.numeroTicket }}</ins>
-                    
-                    </v-row>
-             
-                    <v-row class="mt-5 mb-5" align="center"
-                        
-                        >
-                    <strong class="ml-10 mr-5">Mensagem:</strong>
-                    
-                  {{umTicket.mensagem}}
-                    
-                    </v-row>
-
-                    <v-row class="mt-5 mb-5" align="center"
-                        
-                        >
-                    <strong class="ml-10 mr-5">Data de Cadastro:</strong>
-                    
-                   {{umTicket.dataCadastro}}
-                    
-                    </v-row>
-
-                    <v-row class="mt-5 mb-5" align="center"
-                       
-                        >
-                    <strong class="ml-10 mr-5">Status:</strong>
-                    
-                   {{setaStatusTicket(umTicket)}}
-                    
-                    </v-row>
-
-
-                    <v-row v-if="umTicket.status === 4" class="mt-5 mb-5" align="center"
-                       
-                        >
-                    <strong class="ml-10 mr-5">Avaliação:</strong>
-                    
-                    <v-rating
-                        v-model="umTicket.avaliacao"
-                        background-color="purple lighten-3"
-                        color="purple"
-                        small
-                      ></v-rating>
-                    
-                    </v-row>
-
-
-
-              <v-card-actions v-show="umTicket.status === 1 | umTicket.status === 2 | umTicket.status === 3 ">
-                 <v-btn block outlined color="primary"  dark @click="mostrarChat = !mostrarChat">Chat</v-btn>
-              </v-card-actions> 
                 <v-dialog 
               class="mx-auto pa-6 transition-swing"
               v-model="mostrarChat"
