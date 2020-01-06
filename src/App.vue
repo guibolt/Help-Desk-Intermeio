@@ -18,10 +18,10 @@ export default {
   },
   data:()=>({
     itensDrawer: undefined
-  })
-  // created() {
-  //   if ( localStorage.getItem("token")) 
-  //      this.$router.push("/");
-  // }
+  }),
+  created() {
+    if ( localStorage.getItem("token")) 
+       this.$router.push("/");
+  }
 }
 </script>
