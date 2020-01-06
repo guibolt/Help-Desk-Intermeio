@@ -199,15 +199,12 @@ export default {
       switch (card.title) {
         case "TICKETS ABERTOS":
           return this.totalAbertos;
-          break;
-
+          
         case "Tickets em andamento":
           return this.totalAndamento;
-          break;
-
+  
         case "Tickets Concluídos":
           return this.totalFechados;
-          break;
       }
     },
     setaALista(card) {
