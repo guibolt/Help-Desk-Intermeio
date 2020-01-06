@@ -162,5 +162,20 @@ export default {
         commit("cadastroFalha", error.message);
       });
   },
+  async concluirTicket({ commit }, Avaliacao) {
+    await apiClient
+      .post('/Tickets/Fechar',Avaliacao, {
+        headers: {
+          autorToken: JSON.parse(localStorage.getItem("token")).tokenUsuario
+        }
+      })
+      .then(resp => {
+        console.log("Requisicao concluir Realizada", resp.data);
+        return commit("fecharTicket", resp.data.resultado);
+      })
+      .catch(error => {
+        commit("cadastroFalha", error.message);
+      });
+  },
   chamaReset: ({ commit }) => commit("resetStore")
 };

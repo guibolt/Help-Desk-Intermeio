@@ -78,5 +78,6 @@ export default {
     for (let prop in state) {
       state[prop] = initialState[prop];
     }
-  }
+  },
+  fecharTicket: (state,mensagem) => state.mensagem = mensagem
 };
