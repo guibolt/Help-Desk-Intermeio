@@ -88,7 +88,7 @@
               
               <v-card-actions v-if="umTicket.status === 3">
                  <v-btn block color="primary"  dark @click="mostrarChat = !mostrarChat">Chat</v-btn>
-              </v-card-actions>
+              </v-card-actions> 
                 <v-dialog 
               class="mx-auto pa-6 transition-swing"
               v-model="mostrarChat"
