@@ -57,7 +57,7 @@
                         >
                     <strong class="ml-10 mr-5">Mensagem:</strong>
                     
-                   <ins>{{umTicket.mensagem}}</ins>
+                  {{umTicket.mensagem}}
                     
                     </v-row>
 
