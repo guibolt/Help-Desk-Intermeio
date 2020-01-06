@@ -85,8 +85,16 @@
                         1 = Aberto, 3 = Andamento
                     
                     </v-row>
+                   
+                    <v-row v-if="umTicket.status === 4" class="mt-5 mb-5" align="center"
+                        
+                        >
+                    <strong class="ml-10 mr-5">Avaliação :</strong>
+                        {{ umTicket.avaliacao}}
+                    
+                    </v-row>
               
-              <v-card-actions v-if="umTicket.status === 3">
+              <v-card-actions v-if="umTicket.status === 3 || umTicket.status === 2">
                  <v-btn block color="primary"  dark @click="mostrarChat = !mostrarChat">Chat</v-btn>
               </v-card-actions> 
                 <v-dialog 
@@ -99,7 +107,7 @@
               <template v-slot:activator="{ on }"></template>
               <v-card>
                 <v-card-title>
-              <v-spacer></v-spacer>
+              <v-spacer></v-spacer> 
               <v-toolbar-title> <h4>{{umTicket.titulo}}</h4></v-toolbar-title>
               <v-spacer></v-spacer>
               <v-btn icon slot="activator" @click="mostrarChat= false">

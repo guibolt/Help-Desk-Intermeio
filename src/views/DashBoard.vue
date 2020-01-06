@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <h1 class="display-2 white--text text-center mt-5 font-weight-bold">DashBoard</h1>
+    <h1 class="display-2 white--text text-center mt-5 font-weight-bold" >DashBoard</h1>
     <v-row align="center" justify="space-around" style="height: 300px;">
       <v-card class="mx-auto mb-5" width="350" shaped v-for="card in cards" :key="card.title">
         <v-card-text>
