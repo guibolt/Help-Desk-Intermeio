@@ -69,7 +69,7 @@ export default {
     async EnviarMensagem(id) {
 
       
-      this.resposta.anexo.nomeArquivo = this.arquivo.name
+     // this.resposta.anexo.nomeArquivo = this.arquivo.name
       // this.resposta.anexo.Arquivo = 
       this.resposta.ticketId = id
 
@@ -91,7 +91,7 @@ export default {
         });
       }
 
-      this.mensagem = "";
+      this.resposta.mensagem = "";
       await this.buscarOTicket(this.number);
     }
   },
