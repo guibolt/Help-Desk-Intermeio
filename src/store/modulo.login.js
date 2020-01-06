@@ -29,7 +29,10 @@ export const login = {
       state.SucessoLogin = false;
       state.ACarregar = false;
     },
-    LogOut: state => (state.SucessoLogin = true),
+    LogOut: state => {
+      state.SucessoLogin = true,
+      state.ACarregar = false
+    },
     SucessoAoLogar: (state, resultado) => {
       if (resultado != null) {
         state.nome = resultado.nome;

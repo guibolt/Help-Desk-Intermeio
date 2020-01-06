@@ -75,17 +75,8 @@
                         >
                     <strong class="ml-10 mr-5">Status:</strong>
                     
-                   {{umTicket.status}}
-                    
+                   {{setaStatusTicket(umTicket)}}
                     </v-row>
-                    <v-row class="mt-5 mb-5" align="center"
-                         justify="left"
-                        >
-                    <strong class="ml-10 mr-5">Tipos de Status:</strong>
-                        1 = Aberto, 2 = Andamento, 3 = Concluído
-                    
-                    </v-row>
-              
               <v-card-actions>
                  <v-btn block color="primary"  dark @click="mostrarChat = !mostrarChat">Chat</v-btn>
               </v-card-actions>
@@ -132,7 +123,22 @@ export default {
     ...mapState(['umTicket','numeroTicket'])
   },
   methods:{
-  ...mapActions(['buscarOTicket'])
+  ...mapActions(['buscarOTicket']),
+  setaStatusTicket(ticket){
+       switch (ticket.status) {
+        case 1:
+          return "Aberto";
+          break;
+
+        case 2:
+          return "Em Andamento";
+          break;
+
+        case 3:
+          return "Concluído"
+          break;
+      }
+  }
 },
    components: {
     Chat
