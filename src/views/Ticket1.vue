@@ -23,7 +23,7 @@
               v-else
             tile
             height="400"
-            width="800"
+            width="1000"
             class="ml-10"
           
             >
@@ -36,8 +36,8 @@
              align="center"
             justify="center"
         >
-                <v-toolbar-title class="text-center headline">
-                  <v-icon color="white" size="36" class="mr-5">forum</v-icon>  <strong>TICKET :</strong>  {{umTicket.titulo}}
+                <v-toolbar-title class="text-center .font-regular">
+                  <v-icon color="white" size="32" class="mr-5">forum</v-icon>  <strong>TICKET :</strong>  {{umTicket.titulo}}
                 </v-toolbar-title>
 
                </v-row>

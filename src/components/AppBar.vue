@@ -35,7 +35,7 @@
 
 
           <v-list-item-content >
-            <v-list-item-title class="white--text subtitle-1">{{ userName[0].toUpperCase() + userName.slice(1).toLowerCase()}}</v-list-item-title>
+            <v-list-item-title class="white--text subtitle-1">{{ userName }}</v-list-item-title>
           </v-list-item-content>
 
           <v-list-item-content>
@@ -161,6 +161,8 @@ export default {
     ...mapState(["nome", "tipo"]),
      retornaTexto(){
       return this.mini ? '': 'Novo Ticket'
+
+       this.userName[0].toUpperCase() + this.userName.slice(1).toLowerCase()
     }, 
 
   },
