@@ -20,7 +20,7 @@
         </template>
       </v-card-text>
     </vue-perfect-scrollbar>
-     <v-text-field v-model="resposta.mensagem" flat clearable outlined label="Escreva sua mensagem aqui." ></v-text-field>   
+     <v-text-field v-model="resposta.mensagem" flat clearable outlined label="Escreva sua mensagem aqui."></v-text-field>   
     <v-card-actions>   
       <v-spacer></v-spacer>
         <v-flex>
@@ -69,7 +69,8 @@ export default {
     async EnviarMensagem(id) {
 
       
-      this.resposta.anexo.nomeArquivo = this.arquivo.name
+
+      // this.resposta.anexo.nomeArquivo = this.arquivo.name
       // this.resposta.anexo.Arquivo = 
       this.resposta.ticketId = id
 
@@ -83,7 +84,7 @@ export default {
 
       if (this.falhaEnviar != null) {
         const toast = this.$toast;
-        this.falhaEnviar.forEach(function(item, indice, array) {
+        this.falhaEnviar.forEach(function(item, array) {
           toast.error(item, "Erro", {
             position: "topRight",
             timeout: 6000
@@ -91,7 +92,7 @@ export default {
         });
       }
 
-      this.mensagem = "";
+      this.resposta.mensagem = "";
       await this.buscarOTicket(this.number);
     }
   },

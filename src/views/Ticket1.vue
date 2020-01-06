@@ -22,8 +22,8 @@
             <v-card 
               v-else
             tile
-            height="500"
-            width="500"
+            height="400"
+            width="800"
             class="ml-10"
           
             >
@@ -33,43 +33,61 @@
                 flat
               >
                <v-row
-          align="center"
+             align="center"
             justify="center"
         >
                 <v-toolbar-title class="text-center headline">
-                  <v-icon color="white" size="40">forum</v-icon>Ticket Numero:
-                  <v-chip color="green">{{ umTicket.numeroTicket }}</v-chip>
+                  <v-icon color="white" size="36" class="mr-5">forum</v-icon>  <strong>TICKET :</strong>  {{umTicket.titulo}}
                 </v-toolbar-title>
 
                </v-row>
               </v-toolbar>
-                <v-card-text class="title" >
-                  <v-chip color="primary" large >
+               
+                    <v-row class="mt-5 mb-5" align="center"
+                         justify="left"
+                        >
+                    <strong class="ml-10 mr-5">Número de identificação:</strong>
+                    
+                    <ins>{{ umTicket.numeroTicket }}</ins>
+                    
+                    </v-row>
+             
+                    <v-row class="mt-5 mb-5" align="center"
+                         justify="left"
+                        >
+                    <strong class="ml-10 mr-5">Mensagem:</strong>
+                    
+                   <ins>{{umTicket.mensagem}}</ins>
+                    
+                    </v-row>
 
-                  Titulo
-                  </v-chip>
-                  {{umTicket.titulo}}
-                  </v-card-text>
-                <v-card-text class="title" >
-                   <v-chip color="primary" large >
-                      Mensagem
-                     </v-chip>
-                 {{umTicket.mensagem}}
-                  </v-card-text>
-                <v-card-text class="title" >
-                    <v-chip color="primary" large >
-                       Data de Cadastro
-                    </v-chip>
+                    <v-row class="mt-5 mb-5" align="center"
+                         justify="left"
+                        >
+                    <strong class="ml-10 mr-5">Data de Cadastro:</strong>
+                    
+                   {{umTicket.dataCadastro}}
+                    
+                    </v-row>
 
-                  {{umTicket.dataCadastro}}
-
-                </v-card-text>
-                <v-card-text class="title" >
-                  Status: {{umTicket.dataCadastro}}
-                  </v-card-text>
+                    <v-row class="mt-5 mb-5" align="center"
+                         justify="left"
+                        >
+                    <strong class="ml-10 mr-5">Status:</strong>
+                    
+                   {{umTicket.status}}
+                    
+                    </v-row>
+                    <v-row class="mt-5 mb-5" align="center"
+                         justify="left"
+                        >
+                    <strong class="ml-10 mr-5">Tipos de Status:</strong>
+                        1 = Aberto, 2 = Andamento, 3 = Concluído
+                    
+                    </v-row>
               
               <v-card-actions>
-                <v-btn @click="mostrarChat = !mostrarChat">Chat</v-btn>
+                 <v-btn block color="primary"  dark @click="mostrarChat = !mostrarChat">Chat</v-btn>
               </v-card-actions>
                 <v-dialog 
               class="mx-auto pa-6 transition-swing"
